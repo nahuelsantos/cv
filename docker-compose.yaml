@@ -4,8 +4,6 @@ services:
     build: ./web
     ports:
       - "15000:80"
-    volumes:
-      - ./backend/app:/usr/src/backend/app
     tty: true
     restart: always
 
