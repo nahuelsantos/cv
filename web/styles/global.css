@@ -31,6 +31,10 @@ a, a:hover {
   color: var(--primary-color);
 }
 
+h5 {
+  line-height: 0px;
+}
+
 hr {
   padding: 1rem 0;
   border: 0;
