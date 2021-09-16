@@ -1,8 +1,118 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<body>
-
-<h1>Please, come back later</h1>
-
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nahuel Santos - Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/landing.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <div class="doc__bg"></div>
+    <nav class="header">
+      <h1 class="logo">Nahuel <span class="logo__thin">Santos</span></h1>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="https://www.linkedin.com/in/nahuelsantos/" target="_blank" class="link link--dark"><i class="fab fa-linkedin"></i>LinkedIn</a></li>
+        <li class="menu__item"><a href="https://github.com/nahuelsantos" target="_blank" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      <aside class="doc__nav">
+        <ul>
+          <li class="js-btn selected">About Me</li>
+          <li class="js-btn">Working Experience</li>
+          <li class="js-btn">Education</li>
+          <li class="js-btn">Certifications</li>
+        </ul>
+      </aside>
+      <article class="doc__content">
+        <!-- <div class="hero__terminal">
+          <pre>
+            <code class="shell-session demo">admin ~ $ </code>
+          </pre>
+        </div> -->
+        <section class="js-section">
+          <h3 class="section__title">About Me</h3>
+          <p>As a systems engineer and full-stack developer, I am passionate about learning new domains and build perfect solutions for any kind of problem. 
+            I love learning new skills and growing as a professional. I have strong architectural design, OOP skills and leadership capabilities. 
+            I maintain excellent communication with stakeholders and a proactive attitude.
+          </p>
+          <p>With more than 15 years of experience in the software industry, I have been involved in all phases of the development life cycle, 
+            building robust, reusable, escalable and maintainable software.
+          </p>
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Working Experience</h3>
+          <article>
+            <h4 class="section__title">[Apr 2021 - Today] Senior Software Engineer</h4>
+            <h5 class="section__title"><a href="https://www.xero.com/" target="_blank">@Xero</a>, Auckland</h5>
+            <p>Develop in a micro-service architecture for integrations between Xero App Store and different 3rd party platforms such as Mailchimp, Google, Microsoft among others.</p>
+            <p>Continuous Integration and Continuous Delivery with Team City and AWS services.</p>
+          </article>
+          <article>
+            <h4 class="section__title">[Mar 2015 - Mar 2021] Solutions developer</h4>
+            <h5 class="section__title"><a href="https://www.sandfield.co.nz/" target="_blank">@Sandfield</a>, Auckland</h5>
+            <p>Direct contact with internal and external stakeholders. Business Analysis and requirements elicitation for the logistics industry.
+            Refactoring and migration to a microservices architecture by decoupling existing monolithic applications. Reduction of response time and server load by implementing Redis Cache and Rate limiting. </p>
+            <p>Continuous Integration and Continuous Delivery with Azure DevOps. Cross-platform Mobile Development using React Native and Cordova Framework.</p>
+          </article>
+          <article>
+            <h4 class="section__title">[Aug 2013 - Sep 2014] .NET Full-stack developer </h4>
+            <h5 class="section__title">@FiscalGIS, Buenos Aires</h5>
+            <p>Requirements elicitation with external customers (municipal and provincial governments). <br/>
+            Design and development of GIS web and desktop systems implementing a three-layer architecture using C#, Web forms and Win forms with Oracle database.<br/>
+            Design and development of internal time tracking tool using .NET MVC 5, Entity Framework Code First and Windows Azure Cloud Platform.<br/>
+            </p>
+          </article>
+          <article>
+            <h4 class="section__title">[Jun 2010 - Jun 2013] .NET Full-stack developer</h4>
+            <h5 class="section__title"><a href="http://www.infomeda.com/" target="_blank">@Infomeda</a>, La Plata</h5>
+            <p>Requirements elicitation with internal clients (mainly SEO and PPC teams). Direct cooperation with stakeholders during all project's life cycle phases.</p>
+          </article>
+          <article>
+            <h4 class="section__title">[Aug 2009 - Jun 2010] Java full-stack developer</h4>
+            <h5 class="section__title"><a href="http://www.snoopconsulting.com/" target="_blank">@Snoop Consulting</a>, La Plata</h5>
+            <p>Design and development of web applications for financial companies using Java, Spring Framework and DB2 Database.</p>
+          </article>
+          <hr />
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Education</h3>
+          <article>
+            <h4 class="section__title">[2012 - 2014] <a href="http://postgrado.info.unlp.edu.ar/Eng/Carreras/Magisters/Ingenieria_de_Software/Ingenieria_de_Software.html" target="_blank">MSc. Software Engineering</a></h4>
+            <h5 class="section__title"><a href="https://www.info.unlp.edu.ar/" target="_blank">@Universidad Nacional de La Plata</a>, Argentina</h5>
+            <p>Started working on master thesis’ state of art, focusing the research on game development patterns.</p>
+          </article>
+          <article>
+            <h4 class="section__title">[2005 - 2011] B.Eng. System Information Engineering</h4>
+            <h5 class="section__title"><a href="https://www.frlp.utn.edu.ar/carrera-sistemas" target="_blank">@UTN</a>, Argentina</h5>
+            <p>Member of MAPS Investigation Team. I worked as a researcher in various technologies related to software engineering, such as BPM, MDA, BDD and UML profiles.</p>
+          </article>
+          <hr />
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Certifications</h3>
+          <article>
+            <h4 class="section__title">[2017 - 2018] Deep Learning Specialization</h4>
+            <h5 class="section__title"><a href="https://www.deeplearning.ai/" target="_blank">@Coursera</a>, by deeplearning.ai</h5>
+            <p>Foundations of Deep Learning. Convolutional networks and RNNs. Case studies from healthcare, autonomous driving, sign language reading, music generation, and natural language processing.</p>
+          </article>
+          <article>
+            <h4 class="section__title">[2016] Self-Driving Car Engineer</h4>
+            <h5 class="section__title"><a href="https://www.udacity.com/course/self-driving-car-engineer-nanodegree--nd013" target="_blank">@Udacity</a></h5>
+            <p>Driverless car technologies such as Computer Vision and  Deep Learning for detecting lanes, predicting steering angles and perceiving the environment. Sensor Fusion and Localization for Filtering and Path Planning.</p>
+          </article>
+        </section>
+      </article>
+    </div>
+    <footer class="footer">CV based on Scribbler. Scribbler is a free HTML template created exclusively for <a href="https://tympanus.net/codrops/?p=33686" target="_blank" class="link link--light">Codrops</a>.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scripts/cv.js"></script>
+  </body>
 </html>
