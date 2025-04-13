@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Box, 
   Typography, 
@@ -10,61 +10,99 @@ import {
   useMediaQuery
 } from '@mui/material';
 import { 
-  Email as EmailIcon, 
   LinkedIn as LinkedInIcon, 
   GitHub as GitHubIcon,
-  Phone as PhoneIcon,
-  LocationOn as LocationIcon
+  LocationOn as LocationIcon,
+  ContactMail as ContactMailIcon
 } from '@mui/icons-material';
 import { Profile } from '../../types';
+import ContactForm from '../ContactForm';
 
 interface HeaderProps {
   profile: Profile;
 }
 
 const Header: React.FC<HeaderProps> = ({ profile }) => {
+  const [contactFormOpen, setContactFormOpen] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const handleOpenContactForm = () => {
+    setContactFormOpen(true);
+  };
+
+  const handleCloseContactForm = () => {
+    setContactFormOpen(false);
+  };
+  
   return (
-    <Box 
-      component="header" 
+    <Box
       sx={{
         py: 8,
-        px: 2,
         bgcolor: 'background.paper',
         borderBottom: '1px solid',
         borderColor: 'divider',
       }}
     >
-      <Container maxWidth="lg">
-        <Box sx={{ textAlign: isMobile ? 'center' : 'left' }}>
-          <Typography variant="h1" component="h1" gutterBottom>
+      <Container>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: isMobile ? 'center' : 'flex-start',
+            textAlign: isMobile ? 'center' : 'left',
+          }}
+        >
+          <Typography 
+            variant="h1" 
+            component="h1" 
+            gutterBottom
+            sx={{ 
+              fontSize: { xs: '2.5rem', md: '3.5rem' },
+              fontWeight: 700,
+              letterSpacing: -0.5,
+              mb: 1
+            }}
+          >
             {profile.name}
           </Typography>
+          
           <Typography 
-            variant="h5" 
-            component="h2" 
-            gutterBottom 
-            sx={{ color: 'text.secondary', fontWeight: 400 }}
+            variant="h2" 
+            color="primary" 
+            sx={{ 
+              fontSize: { xs: '1.25rem', md: '1.5rem' },
+              fontWeight: 500,
+              mb: 2
+            }}
           >
             {profile.title}
           </Typography>
-
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, justifyContent: isMobile ? 'center' : 'flex-start' }}>
-            <LocationIcon sx={{ mr: 1, color: 'text.secondary' }} />
-            <Typography variant="body1" color="text.secondary">
-              {profile.location}
-            </Typography>
-          </Box>
-
-          <Box sx={{ my: 3 }}>
-            <Typography variant="body1" paragraph>
-              {profile.summary}
-            </Typography>
-          </Box>
-
-          <Divider sx={{ my: 3 }} />
+          
+          {profile.location && (
+            <Stack 
+              direction="row" 
+              spacing={1} 
+              alignItems="center"
+              sx={{ mb: 2 }}
+            >
+              <LocationIcon fontSize="small" color="action" />
+              <Typography variant="body1" color="text.secondary">
+                {profile.location}
+              </Typography>
+            </Stack>
+          )}
+          
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              maxWidth: '800px',
+              fontSize: '1.1rem',
+              lineHeight: 1.6,
+            }}
+          >
+            {profile.summary}
+          </Typography>
 
           <Stack 
             direction={isMobile ? 'column' : 'row'} 
@@ -74,27 +112,14 @@ const Header: React.FC<HeaderProps> = ({ profile }) => {
               justifyContent: isMobile ? 'center' : 'flex-start' 
             }}
           >
-            {profile.contact.email && (
-              <Button
-                variant="outlined"
-                startIcon={<EmailIcon />}
-                href={`mailto:${profile.contact.email}`}
-                sx={{ borderRadius: 2 }}
-              >
-                Email
-              </Button>
-            )}
-            
-            {profile.contact.phone && (
-              <Button
-                variant="outlined"
-                startIcon={<PhoneIcon />}
-                href={`tel:${profile.contact.phone}`}
-                sx={{ borderRadius: 2 }}
-              >
-                Call
-              </Button>
-            )}
+            <Button
+              variant="outlined"
+              startIcon={<ContactMailIcon />}
+              onClick={handleOpenContactForm}
+              sx={{ borderRadius: 2 }}
+            >
+              Contact Me
+            </Button>
             
             {profile.contact.linkedin && (
               <Button
@@ -124,6 +149,8 @@ const Header: React.FC<HeaderProps> = ({ profile }) => {
           </Stack>
         </Box>
       </Container>
+      
+      <ContactForm open={contactFormOpen} onClose={handleCloseContactForm} />
     </Box>
   );
 };

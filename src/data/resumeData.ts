@@ -8,13 +8,11 @@ import {
 
 export const profile: Profile = {
   name: "Nahuel Santos",
-  title: "Staff/Principal Software Engineer | Backend & System Architecture",
+  title: "Software Engineer | Backend & System Architecture",
   location: "Barcelona, Catalonia, Spain",
   contact: {
-    phone: "[Your Phone]",
-    email: "[Your Email]",
-    linkedin: "linkedin.com/in/yourprofile",
-    github: "github.com/yourprofile",
+    linkedin: "linkedin.com/in/nahuelsantos",
+    github: "github.com/nahuelsantos",
   },
   summary: "A pragmatic and experienced engineering leader with over 15 years designing, building, and scaling complex software systems. Proven ability to architect robust solutions (.NET, Go, Microservices, AWS), lead technical initiatives across teams, and drive significant improvements in performance, reliability, and developer productivity. Adept at translating ambiguous business needs into concrete technical strategies, mentoring engineers, and fostering collaboration. Excels at tackling large-scale integration challenges, modernizing legacy systems, and taking ownership from concept through production deployment. Seeking a Staff (L6) or Principal (L7) Engineer role to leverage deep technical expertise and leadership to solve impactful problems."
 };
