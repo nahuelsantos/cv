@@ -5,9 +5,11 @@ import Header from './components/Header';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
 import Education from './components/Education';
+import Projects from './components/Projects';
 import Footer from './components/Footer';
 import Navigation from './components/Header/Navigation';
 import { profile, experiences, skills, education, certifications } from './data/resumeData';
+import { projects } from './data/projectsData';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +20,7 @@ const App: React.FC = () => {
         <Header profile={profile} />
         <Experience experiences={experiences} />
         <Skills skills={skills} />
+        <Projects projects={projects} />
         <Education education={education} certifications={certifications} />
         <Footer />
       </Box>

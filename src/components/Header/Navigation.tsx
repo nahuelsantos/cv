@@ -11,7 +11,6 @@ import {
   Container,
   useScrollTrigger,
   Slide,
-  useMediaQuery,
   useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -40,7 +39,6 @@ const HideOnScroll = (props: HideOnScrollProps) => {
 
 const Navigation: React.FC<NavigationProps> = ({ transparent = false }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -54,6 +52,7 @@ const Navigation: React.FC<NavigationProps> = ({ transparent = false }) => {
   const navItems = [
     { name: 'Experience', href: '#experience' },
     { name: 'Skills', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
     { name: 'Education', href: '#education' },
   ];
 

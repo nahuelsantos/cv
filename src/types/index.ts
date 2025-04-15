@@ -25,6 +25,14 @@ export interface Certification {
   description?: string;
 }
 
+export interface Project {
+  title: string;
+  description: string;
+  githubUrl: string;
+  technologies?: string[];
+  image?: string;
+}
+
 export interface Profile {
   name: string;
   title: string;

@@ -36,13 +36,11 @@ const Education: React.FC<EducationProps> = ({ education, certifications }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Box 
-      component="section" 
+    <Box
       id="education"
       sx={{
         py: 8,
-        px: 2,
-        bgcolor: 'background.default',
+        bgcolor: 'background.paper',
       }}
     >
       <Container maxWidth="lg">

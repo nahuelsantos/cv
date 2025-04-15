@@ -5,7 +5,6 @@ import {
   Container, 
   Button, 
   Stack, 
-  Divider,
   useTheme,
   useMediaQuery
 } from '@mui/material';

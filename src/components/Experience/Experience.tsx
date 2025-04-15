@@ -23,12 +23,10 @@ const Experience: React.FC<ExperienceProps> = ({ experiences }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Box 
-      component="section" 
+    <Box
       id="experience"
       sx={{
         py: 8,
-        px: 2,
         bgcolor: 'background.default',
       }}
     >

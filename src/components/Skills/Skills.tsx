@@ -31,12 +31,10 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Box 
-      component="section" 
+    <Box
       id="skills"
       sx={{
         py: 8,
-        px: 2,
         bgcolor: 'background.paper',
       }}
     >
