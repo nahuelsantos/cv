@@ -13,7 +13,7 @@ import {
   Alert,
   CircularProgress
 } from '@mui/material';
-import api from '../../utils/api';
+// import api from '../../utils/api'; // TODO: Uncomment when integrating with backend
 
 interface ContactFormProps {
   open: boolean;
@@ -75,11 +75,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ open, onClose }) => {
     setLoading(true);
     
     try {
-      const response = await api.post('/contact', {
-        name,
-        email,
-        message
-      });
+      // TODO: Integrate with actual form service (Netlify Forms, Formspree, etc.)
+      // await api.post('/contact', { name, email, message });
+      console.log('Form submission:', { name, email, message });
       
       setAlert({
         open: true,

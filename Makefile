@@ -60,7 +60,7 @@ start:
 	@echo "${YELLOW}Building React app locally...${NC}"
 	@npm run build
 	@echo "${YELLOW}Starting with Docker Compose...${NC}"
-	@$(DOCKER_COMPOSE) up --build
+	@$(DOCKER_COMPOSE) up -d --build
 	@echo "${GREEN}Docker Compose is running!${NC}"
 
 # Stop Docker containers

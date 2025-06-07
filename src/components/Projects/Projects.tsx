@@ -10,8 +10,6 @@ import {
   Button,
   Chip,
   Stack,
-  useTheme,
-  useMediaQuery,
   CardHeader,
 } from '@mui/material';
 import {
@@ -25,8 +23,6 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ projects }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box

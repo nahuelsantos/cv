@@ -1,6 +1,6 @@
 # Nahuel Santos - Personal Resume Website
 
-A modern, responsive personal resume website showcasing my experience as a Software Engineer specializing in Backend & System Architecture. Built with React, TypeScript, Material UI, and Go.
+A modern, responsive personal resume website showcasing my experience as a Software Engineer specializing in Backend & System Architecture. Built with React, TypeScript, and Material UI.
 
 ## 🚀 Live Demo
 
@@ -10,33 +10,26 @@ Visit [nahuelsantos.com](https://nahuelsantos.com) to see it in action.
 
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Modern UI**: Clean, professional interface built with Material UI
-- **Contact Form**: Secure backend contact form powered by Go
+- **Contact Form**: Frontend contact form (backend integration ready)
 - **Project Showcase**: Interactive project cards with technology tags
 - **Professional Experience**: Detailed work history and achievements
 - **Skills Section**: Comprehensive technical skills breakdown
-- **Fast & Lightweight**: Optimized performance with Docker deployment
+- **Fast & Lightweight**: Optimized React build with Docker deployment
 
 ## 🛠️ Tech Stack
 
-**Frontend:**
 - React 18 with TypeScript
 - Material UI (MUI) for components and styling
 - Responsive design with mobile-first approach
-
-**Backend:**
-- Go for API server and contact form handling
-- RESTful API design
-
-**Infrastructure:**
-- Docker & Docker Compose for containerization
-- Traefik for reverse proxy and SSL
-- Optimized production builds
+- Docker for containerization
+- GitHub Actions for CI/CD
 
 ## 🏃‍♂️ Quick Start
 
 ### Prerequisites
 - Docker and Docker Compose
 - Make (for convenience commands)
+- Node.js 18+ (for local development)
 
 ### Run with Docker
 ```bash
@@ -62,32 +55,48 @@ make test
 ## 📁 Project Structure
 
 ```
-├── client/                 # React frontend
-│   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── data/         # Resume and project data
-│   │   ├── types/        # TypeScript types
-│   │   └── utils/        # API utilities
-│   └── public/           # Static assets
-├── backend/               # Go API server
-│   ├── cmd/api/          # Main application
-│   └── internal/         # Internal packages
-├── docker-compose.yml     # Container orchestration
-└── Makefile              # Development commands
+├── src/                    # React source code
+│   ├── components/        # React components
+│   ├── data/             # Resume and project data
+│   ├── types/            # TypeScript types
+│   └── utils/            # API utilities
+├── public/               # Static assets
+├── .github/workflows/    # CI/CD workflows
+├── docker-compose.yml    # Container orchestration
+├── Dockerfile           # Docker configuration
+└── Makefile             # Development commands
 ```
 
 ## 📧 Contact Form
 
-The contact form is powered by a secure Go backend that handles form submissions. The API validates input and can be configured to send emails or store messages as needed.
+The contact form is currently a frontend-only component. It's designed to be easily integrated with:
+- **Netlify Forms**
+- **Formspree**
+- **EmailJS** 
+- **Custom backend API**
+
+## 🚀 Deployment
+
+### GitHub Container Registry
+When you publish a release (e.g., `v1.0.0`), GitHub Actions will automatically:
+- Build and test the React app
+- Create a Docker image
+- Push to `ghcr.io/nahuelsantos/cv:v1.0.0` and `ghcr.io/nahuelsantos/cv:latest`
+
+### Pull and Run
+```bash
+docker pull ghcr.io/nahuelsantos/cv:latest
+docker run -p 3001:3001 ghcr.io/nahuelsantos/cv:latest
+```
 
 ## 🎨 Customization
 
 This project serves as both my personal website and a template for other developers. Key customization points:
 
-- **Resume Data**: Update `client/src/data/resumeData.ts` with your information
-- **Projects**: Modify `client/src/data/projectsData.ts` with your projects
-- **Styling**: Customize the Material UI theme in `client/src/theme/`
-- **Contact Form**: Adapt the Go backend for your email/notification preferences
+- **Resume Data**: Update `src/data/resumeData.ts` with your information
+- **Projects**: Modify `src/data/projectsData.ts` with your projects
+- **Styling**: Customize the Material UI theme in `src/theme/`
+- **Contact Form**: Add your preferred form handling service
 
 ## 📄 License
 

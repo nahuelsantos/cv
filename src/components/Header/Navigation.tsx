@@ -11,7 +11,6 @@ import {
   Container,
   useScrollTrigger,
   Slide,
-  useTheme,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -38,7 +37,6 @@ const HideOnScroll = (props: HideOnScrollProps) => {
 };
 
 const Navigation: React.FC<NavigationProps> = ({ transparent = false }) => {
-  const theme = useTheme();
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
