@@ -26,7 +26,7 @@ help:
 	@echo "${BOLD}Available commands:${NC}"
 	@echo "${BLUE}make help${NC}    - Display this help message"
 	@echo "${BLUE}make run${NC}     - Run the application locally (without Docker)"
-	@echo "${BLUE}make test${NC}    - Run tests for both frontend and backend"
+	@echo "${BLUE}make test${NC}    - Run tests for the React app"
 	@echo "${BLUE}make start${NC}   - Start the app as a Docker Compose container"
 	@echo "${BLUE}make stop${NC}    - Stop the Docker Compose containers"
 	@echo "${BLUE}make clean${NC}   - Clean build artifacts and stop containers"
@@ -34,36 +34,31 @@ help:
 # Run the application locally
 run:
 	@echo "${YELLOW}Installing dependencies...${NC}"
-	@cd backend && go mod tidy && go mod download
-	@cd client && npm install
-	@if [ ! -f client/.env ]; then \
+	@npm install
+	@if [ ! -f .env ]; then \
 		echo "${YELLOW}Creating .env from .env.example...${NC}"; \
-		cp client/.env.example client/.env; \
+		cp .env.example .env; \
 	fi
-	@echo "${YELLOW}Starting Go server in background...${NC}"
-	@cd backend && go run ./cmd/api/main.go &
 	@echo "${YELLOW}Starting React client...${NC}"
-	@cd client && npm start
+	@npm start
 
 # Run tests
 test:
-	@echo "${YELLOW}Running backend tests...${NC}"
-	@cd backend && go test ./...
-	@echo "${YELLOW}Running frontend tests...${NC}"
-	@cd client && npm test -- --watchAll=false
+	@echo "${YELLOW}Running React tests...${NC}"
+	@npm test -- --watchAll=false
 	@echo "${GREEN}All tests completed!${NC}"
 
 # Start with Docker Compose
 start:
 	@echo "${YELLOW}Preparing environment...${NC}"
-	@if [ ! -f client/.env ]; then \
+	@if [ ! -f .env ]; then \
 		echo "${YELLOW}Creating .env from .env.example...${NC}"; \
-		cp client/.env.example client/.env; \
+		cp .env.example .env; \
 	fi
 	@echo "${YELLOW}Installing npm dependencies...${NC}"
-	@cd client && npm install
+	@npm install
 	@echo "${YELLOW}Building React app locally...${NC}"
-	@cd client && npm run build
+	@npm run build
 	@echo "${YELLOW}Starting with Docker Compose...${NC}"
 	@$(DOCKER_COMPOSE) up --build
 	@echo "${GREEN}Docker Compose is running!${NC}"
@@ -77,8 +72,7 @@ stop:
 # Clean build artifacts and stop containers
 clean:
 	@echo "${YELLOW}Cleaning build artifacts...${NC}"
-	@rm -rf client/build
-	@rm -rf backend/bin
+	@rm -rf build
 	@$(DOCKER_COMPOSE) down -v --remove-orphans
 	@docker system prune -f
 	@echo "${GREEN}Clean complete!${NC}" 
