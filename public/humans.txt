@@ -1,0 +1,63 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Developer: Nahuel Santos
+    Contact: nahuel [at] nahuelsantos.com
+    From: Buenos Aires, Argentina
+    GitHub: github.com/nahuelsantos
+
+# THANKS
+
+    React Team - For the amazing framework
+    Create React App - For the easy setup
+    Open Source Community - For all the tools and libraries
+
+# TECHNOLOGY COLOPHON
+
+    ## Frontend
+    React 18
+    TypeScript
+    HTML5, CSS3
+    JavaScript ES6+
+    
+    ## Build Tools
+    Create React App
+    React Scripts
+    Webpack
+    Babel
+    
+    ## Development Tools
+    ESLint
+    Prettier
+    Git
+    VS Code
+    
+    ## Deployment
+    Docker
+    GitHub Actions
+    GitHub Container Registry
+    
+    ## Design
+    Material Design principles
+    Responsive design
+    Modern UI/UX patterns
+
+# SITE
+
+    Last update: 2025/06/11
+    Standards: HTML5, CSS3, ES6+
+    Components: React functional components with hooks
+    IDE: Visual Studio Code
+    Version Control: Git
+    
+    ## Performance
+    Lighthouse optimized
+    Mobile-first responsive design
+    Progressive Web App ready
+    
+    ## Accessibility  
+    WCAG 2.1 AA compliant
+    Screen reader friendly
+    Keyboard navigation support 
