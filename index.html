@@ -3,50 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nahuel Santos - Software Engineer</title>
-    <meta name="description" content="Nahuel Santos - Software Engineer | Backend & System Architecture">
+    <title>Nahuel Santos - Senior Software Engineer</title>
+    <meta name="description" content="Senior Software Engineer with 15+ years of experience in full-stack development, cloud architecture, and team leadership.">
+    <meta name="keywords" content="software engineer, full-stack developer, .NET, Go, JavaScript, cloud architecture, microservices">
+    <meta name="author" content="Nahuel Santos">
     <meta name="theme-color" content="#2d1b69">
     
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nahuelsantos.com/">
+    <meta property="og:title" content="Nahuel Santos - Senior Software Engineer">
+    <meta property="og:description" content="Senior Software Engineer with 15+ years of experience in full-stack development, cloud architecture, and team leadership.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nahuelsantos.com/">
+    <meta property="twitter:title" content="Nahuel Santos - Senior Software Engineer">
+    <meta property="twitter:description" content="Senior Software Engineer with 15+ years of experience in full-stack development, cloud architecture, and team leadership.">
+    
     <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    
-    <!-- Manifest and humans -->
     <link rel="manifest" href="manifest.json">
-    <link type="text/plain" rel="author" href="humans.txt">
     
-    <!-- Pixel Icons -->
-    <link rel="stylesheet" href="pixel-icons.css">
-    
-    <!-- Main Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Theme Toggle -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-        <img src="assets/moon-solid.svg" alt="toggle theme" class="icon" id="theme-icon">
+        <img src="assets/moon.svg" alt="toggle theme" class="icon" id="theme-icon">
     </button>
 
     <!-- Header -->
     <header class="header">
         <div class="container">
             <h1 class="name">Nahuel Santos</h1>
-            <h2 class="title">Software Engineer | Backend & System Architecture</h2>
-            
+            <h2 class="title">Software Engineer</h2>
             <div class="location">
                 <img src="assets/location-pin.svg" alt="location" class="icon">
-                <span>Barcelona, Catalonia, Spain</span>
+                Barcelona, Catalonia, Spain
             </div>
-            
-            <p class="summary">
+            <div class="summary">
                 A pragmatic and experienced engineering leader with over 15 years designing, building, and scaling complex software systems. Proven ability to architect robust solutions (.NET, Go, Microservices, AWS), lead technical initiatives across teams, and drive significant improvements in performance, reliability, and developer productivity. Adept at translating ambiguous business needs into concrete technical strategies, mentoring engineers, and fostering collaboration. Excels at tackling large-scale integration challenges, modernizing legacy systems, and taking ownership from concept through production deployment. Seeking a Staff (L6) or Principal (L7) Engineer role to leverage deep technical expertise and leadership to solve impactful problems.
-            </p>
-            
+            </div>
             <div class="actions">
                 <button class="btn btn-outline" onclick="openContactForm()">
-                    <img src="assets/envelope-solid.svg" alt="envelope" class="icon">
+                    <img src="assets/envelope.svg" alt="envelope" class="icon">
                     Contact Me
                 </button>
                 <a href="https://linkedin.com/in/nahuelsantos" target="_blank" class="btn btn-outline">
@@ -57,8 +61,8 @@
                     <img src="assets/github.svg" alt="github" class="icon">
                     GitHub
                 </a>
-                <a href="assets/nahuel-santos-cv.pdf" download class="btn btn-primary">
-                    <img src="assets/download-alt-solid.svg" alt="download" class="icon">
+                <a href="assets/nahuel-santos-cv.pdf" download class="btn btn-outline">
+                    <img src="assets/download-alt.svg" alt="download" class="icon">
                     Download CV
                 </a>
             </div>
@@ -68,15 +72,12 @@
     <!-- Experience -->
     <section class="section" id="experience">
         <div class="container">
-            <div class="section-title-with-icon">
-                <img src="assets/tech-companies.svg" alt="experience" class="section-icon">
-                <h2 class="section-title">Experience</h2>
-            </div>
+            <h2 class="section-title">Experience</h2>
             
-            <div class="experience-item">
+            <div class="card experience-card">
                 <div class="experience-header">
-                    <h3>Senior Software Engineer at AilyLabs</h3>
-                    <span class="period">Oct 2023 – Present</span>
+                    <h3>Senior Software Engineer @ <a href="https://ailylabs.com" target="_blank" class="company-link">AilyLabs</a></h3>
+                    <span class="period" data-full="Oct 2023 – Present" data-short="2023 - Present">Oct 2023 – Present</span>
                 </div>
                 <p class="location">Barcelona, Spain</p>
                 <ul class="responsibilities">
@@ -88,10 +89,10 @@
                 </ul>
             </div>
 
-            <div class="experience-item">
+            <div class="card experience-card">
                 <div class="experience-header">
-                    <h3>Senior Software Engineer at Milestone Systems</h3>
-                    <span class="period">Oct 2022 – Oct 2023</span>
+                    <h3>Senior Software Engineer @ <a href="https://milestonesys.com" target="_blank" class="company-link">Milestone Systems</a></h3>
+                    <span class="period" data-full="Oct 2022 – Oct 2023" data-short="2022 - 2023">Oct 2022 – Oct 2023</span>
                 </div>
                 <p class="location">Barcelona, Spain</p>
                 <ul class="responsibilities">
@@ -102,10 +103,10 @@
                 </ul>
             </div>
 
-            <div class="experience-item">
+            <div class="card experience-card">
                 <div class="experience-header">
-                    <h3>Senior Software Engineer at Xero</h3>
-                    <span class="period">Apr 2021 – Apr 2022</span>
+                    <h3>Senior Software Engineer @ <a href="https://xero.com" target="_blank" class="company-link">Xero</a></h3>
+                    <span class="period" data-full="Apr 2021 – Apr 2022" data-short="2021 - 2022">Apr 2021 – Apr 2022</span>
                 </div>
                 <p class="location">Auckland, New Zealand</p>
                 <ul class="responsibilities">
@@ -115,10 +116,10 @@
                 </ul>
             </div>
 
-            <div class="experience-item">
+            <div class="card experience-card">
                 <div class="experience-header">
-                    <h3>Solutions Developer / Lead / Architect at Sandfield</h3>
-                    <span class="period">Mar 2015 – Apr 2022</span>
+                    <h3>Solutions Developer / Lead / Architect @ <a href="https://sandfield.co.nz" target="_blank" class="company-link">Sandfield</a></h3>
+                    <span class="period" data-full="Mar 2015 – Apr 2022" data-short="2015 - 2022">Mar 2015 – Apr 2022</span>
                 </div>
                 <p class="location">Auckland, New Zealand</p>
                 <ul class="responsibilities">
@@ -131,10 +132,10 @@
                 </ul>
             </div>
 
-            <div class="experience-item">
+            <div class="card experience-card">
                 <div class="experience-header">
-                    <h3>Senior Software Engineer at Fiscalgis</h3>
-                    <span class="period">Aug 2013 – Sep 2014</span>
+                    <h3>Senior Software Engineer @ <a href="https://fiscalgis.com" target="_blank" class="company-link">Fiscalgis</a></h3>
+                    <span class="period" data-full="Aug 2013 – Sep 2014" data-short="2013 - 2014">Aug 2013 – Sep 2014</span>
                 </div>
                 <p class="location">Buenos Aires, Argentina</p>
                 <ul class="responsibilities">
@@ -143,10 +144,10 @@
                 </ul>
             </div>
 
-            <div class="experience-item">
+            <div class="card experience-card">
                 <div class="experience-header">
-                    <h3>Software Engineer / Lead at Infomeda</h3>
-                    <span class="period">Jun 2010 – Jun 2013</span>
+                    <h3>Software Engineer / Lead @ <a href="https://infomeda.com" target="_blank" class="company-link">Infomeda</a></h3>
+                    <span class="period" data-full="Jun 2010 – Jun 2013" data-short="2010 - 2013">Jun 2010 – Jun 2013</span>
                 </div>
                 <p class="location">Buenos Aires, Argentina</p>
                 <ul class="responsibilities">
@@ -155,10 +156,10 @@
                 </ul>
             </div>
 
-            <div class="experience-item">
+            <div class="card experience-card">
                 <div class="experience-header">
-                    <h3>Junior Software Engineer at Snoop Consulting</h3>
-                    <span class="period">Oct 2009 – Jun 2010</span>
+                    <h3>Junior Software Engineer @ <a href="https://snoopconsulting.com" target="_blank" class="company-link">Snoop Consulting</a></h3>
+                    <span class="period" data-full="Oct 2009 – Jun 2010" data-short="2009 - 2010">Oct 2009 – Jun 2010</span>
                 </div>
                 <p class="location">La Plata, Argentina</p>
                 <ul class="responsibilities">
@@ -166,10 +167,10 @@
                 </ul>
             </div>
 
-            <div class="experience-item">
+            <div class="card experience-card">
                 <div class="experience-header">
-                    <h3>Junior Software Engineer / De Facto Lead at Softtek</h3>
-                    <span class="period">Oct 2008 – Oct 2009</span>
+                    <h3>Junior Software Engineer / De Facto Lead @ <a href="https://softtek.com" target="_blank" class="company-link">Softtek</a></h3>
+                    <span class="period" data-full="Oct 2008 – Oct 2009" data-short="2008 - 2009">Oct 2008 – Oct 2009</span>
                 </div>
                 <p class="location">La Plata, Argentina</p>
                 <ul class="responsibilities">
@@ -183,74 +184,66 @@
     <!-- Skills -->
     <section class="section section-alt" id="skills">
         <div class="container">
-            <div class="section-title-with-icon">
-                <img src="assets/machine-learning.svg" alt="skills" class="section-icon">
-                <h2 class="section-title">Technical Skills</h2>
-            </div>
+            <h2 class="section-title">Technical Skills</h2>
             
             <div class="skills-grid">
-                <div class="skill-category">
+                <div class="card">
                     <h3>Core Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">C# (.NET Core/Framework)</span>
-                        <span class="skill-tag">Go</span>
-                        <span class="skill-tag">JavaScript/TypeScript</span>
-                        <span class="skill-tag">Java</span>
+                    <div class="tag-container">
+                        <span class="tag">C# (.NET Core/Framework)</span>
+                        <span class="tag">Go</span>
+                        <span class="tag">JavaScript/TypeScript</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <div class="card">
                     <h3>Frontend</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">React Native</span>
-                        <span class="skill-tag">ASP.NET Web Forms</span>
-                        <span class="skill-tag">HTML5/CSS3</span>
+                    <div class="tag-container">
+                        <span class="tag">React</span>
+                        <span class="tag">React Native</span>
+                        <span class="tag">HTML5/CSS3</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <div class="card">
                     <h3>Backend & Architecture</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Microservices</span>
-                        <span class="skill-tag">gRPC</span>
-                        <span class="skill-tag">REST APIs</span>
-                        <span class="skill-tag">Entity Framework</span>
-                        <span class="skill-tag">Event-Driven Systems</span>
-                        <span class="skill-tag">Domain-Driven Design</span>
+                    <div class="tag-container">
+                        <span class="tag">Microservices</span>
+                        <span class="tag">gRPC</span>
+                        <span class="tag">REST APIs</span>
+                        <span class="tag">Event-Driven Systems</span>
+                        <span class="tag">Domain-Driven Design</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <div class="card">
                     <h3>Cloud & DevOps</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">Kubernetes</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Terraform</span>
-                        <span class="skill-tag">CI/CD</span>
-                        <span class="skill-tag">Azure DevOps</span>
+                    <div class="tag-container">
+                        <span class="tag">AWS</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Terraform</span>
+                        <span class="tag">CI/CD</span>
+                        <span class="tag">Azure DevOps</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <div class="card">
                     <h3>Databases</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">SQL Server</span>
-                        <span class="skill-tag">DynamoDB</span>
-                        <span class="skill-tag">Redis</span>
-                        <span class="skill-tag">Oracle DB</span>
-                        <span class="skill-tag">DB2</span>
+                    <div class="tag-container">
+                        <span class="tag">SQL Server</span>
+                        <span class="tag">DynamoDB</span>
+                        <span class="tag">Redis</span>
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <div class="card">
                     <h3>Observability</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Datadog</span>
-                        <span class="skill-tag">Sentry</span>
-                        <span class="skill-tag">Custom Monitoring</span>
-                        <span class="skill-tag">Logging</span>
+                    <div class="tag-container">
+                        <span class="tag">Datadog</span>
+                        <span class="tag">Sentry</span>
+                        <span class="tag">LGMT stack</span>
+                        <span class="tag">Logging</span>
                     </div>
                 </div>
             </div>
@@ -260,90 +253,78 @@
     <!-- Projects -->
     <section class="section" id="projects">
         <div class="container">
-                          <div class="section-title-with-icon">
-                  <img src="assets/programming.svg" alt="projects" class="section-icon">
-                  <h2 class="section-title">Projects</h2>
-              </div>
+            <h2 class="section-title">Projects</h2>
 
             <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <img src="assets/programming.svg" alt="programming" class="icon">
+                <div class="card">
+                    <div class="card-header">
                         <h3>Don't Let Me Die</h3>
                     </div>
                     <p>A kind of fancy CLI quiz game where you keep your pet alive by answering questions correctly. Features interactive CLI menus, NPM package distribution, and questions fetched from Open Trivia Database. Built to practice creating NPM packages and interactive command-line interfaces.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">CLI</span>
-                        <span class="tech-tag">NPM</span>
-                        <span class="tech-tag">Inquirer</span>
-                        <span class="tech-tag">Chalk</span>
-                        <span class="tech-tag">Figlet</span>
+                    <div class="tag-container">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">CLI</span>
+                        <span class="tag">NPM</span>
+                        <span class="tag">Inquirer</span>
+                        <span class="tag">Chalk</span>
+                        <span class="tag">Figlet</span>
                     </div>
-                    <a href="https://github.com/nahuelsantos/dont-let-me-die" target="_blank" class="btn btn-primary">
+                    <a href="https://github.com/nahuelsantos/dont-let-me-die" target="_blank" class="btn btn-outline">
                         <img src="assets/github.svg" alt="github" class="icon">
                         View on GitHub
                     </a>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <img src="assets/tech-companies.svg" alt="tech companies" class="icon">
+                <div class="card">
+                    <div class="card-header">
                         <h3>Dinky Server</h3>
                     </div>
                     <p>A comprehensive self-hosted server setup with monitoring, security, and service management - all through a single interactive script. Features LGTMA stack (Loki, Grafana, Tempo, Metrics, Argus) for complete observability, Traefik for reverse proxy, Pi-hole for DNS, and automated deployment scripts.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Shell</span>
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">Grafana</span>
-                        <span class="tech-tag">Prometheus</span>
-                        <span class="tech-tag">Loki</span>
-                        <span class="tech-tag">Tempo</span>
-                        <span class="tech-tag">Traefik</span>
-                        <span class="tech-tag">Go</span>
-                        <span class="tech-tag">Makefile</span>
+                    <div class="tag-container">
+                        <span class="tag">Shell</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Grafana</span>
+                        <span class="tag">Prometheus</span>
+                        <span class="tag">Loki</span>
+                        <span class="tag">Tempo</span>
+                        <span class="tag">Traefik</span>
                     </div>
-                    <a href="https://github.com/nahuelsantos/dinky-server" target="_blank" class="btn btn-primary">
+                    <a href="https://github.com/nahuelsantos/dinky-server" target="_blank" class="btn btn-outline">
                         <img src="assets/github.svg" alt="github" class="icon">
                         View on GitHub
                     </a>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <img src="assets/chart-network.svg" alt="chart network" class="icon">
+                <div class="card">
+                    <div class="card-header">
                         <h3>Argus</h3>
                     </div>
                     <p>A LGTM stack validator and tester integrated with the monitoring infrastructure. Provides synthetic testing and validation for the entire observability stack, ensuring reliability and performance of monitoring systems.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Go</span>
-                        <span class="tech-tag">LGTM Stack</span>
-                        <span class="tech-tag">Monitoring</span>
-                        <span class="tech-tag">Testing</span>
-                        <span class="tech-tag">Observability</span>
+                    <div class="tag-container">
+                        <span class="tag">Go</span>
+                        <span class="tag">LGTM Stack</span>
+                        <span class="tag">Monitoring</span>
+                        <span class="tag">Testing</span>
+                        <span class="tag">Observability</span>
                     </div>
-                    <a href="https://github.com/nahuelsantos/argus" target="_blank" class="btn btn-primary">
+                    <a href="https://github.com/nahuelsantos/argus" target="_blank" class="btn btn-outline">
                         <img src="assets/github.svg" alt="github" class="icon">
                         View on GitHub
                     </a>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <img src="assets/futurism.svg" alt="futurism" class="icon">
+                <div class="card">
+                    <div class="card-header">
                         <h3>Personal Resume Website</h3>
                     </div>
                     <p>A modern, responsive resume website built with pure HTML, CSS, and JavaScript. Features dark/light mode, contact form integration, PDF download, and Docker deployment. Showcases professional experience and projects with a clean, mobile-friendly design.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">Nginx</span>
-                        <span class="tech-tag">Makefile</span>
+                    <div class="tag-container">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
                     </div>
-                    <a href="https://github.com/nahuelsantos/cv" target="_blank" class="btn btn-primary">
+                    <a href="https://github.com/nahuelsantos/cv" target="_blank" class="btn btn-outline">
                         <img src="assets/github.svg" alt="github" class="icon">
                         View on GitHub
                     </a>
@@ -355,30 +336,27 @@
     <!-- Education -->
     <section class="section section-alt" id="education">
         <div class="container">
-            <div class="section-title-with-icon">
-                <img src="assets/chart-network.svg" alt="education" class="section-icon">
-                <h2 class="section-title">Education & Certifications</h2>
-            </div>
+            <h2 class="section-title">Education & Certifications</h2>
             
             <div class="education-grid">
                 <div class="education-section">
                     <h3>Academic Education</h3>
                     
-                    <div class="education-item">
+                    <div class="card education-card">
                         <div class="education-header">
                             <h4>Master's Degree, Software Engineering</h4>
-                            <span class="period">2012 – 2014</span>
+                            <span class="period" data-full="2012 – 2014" data-short="2012 - 2014">2012 – 2014</span>
                         </div>
-                        <p class="institution">Universidad Nacional de La Plata (UNLP), Argentina</p>
+                        <p class="institution"><a href="https://unlp.edu.ar" target="_blank" class="institution-link">Universidad Nacional de La Plata (UNLP)</a>, Argentina</p>
                         <p>Focused on advanced software design patterns, architectural principles, software quality assurance, and project management methodologies, deepening the theoretical and practical aspects of building complex software systems.</p>
                     </div>
 
-                    <div class="education-item">
+                    <div class="card education-card">
                         <div class="education-header">
                             <h4>Engineering Degree, Systems Information Engineering</h4>
-                            <span class="period">2005 – 2011</span>
+                            <span class="period" data-full="2005 – 2011" data-short="2005 - 2011">2005 – 2011</span>
                         </div>
-                        <p class="institution">Universidad Tecnológica Nacional (UTN), Argentina</p>
+                        <p class="institution"><a href="https://utn.edu.ar" target="_blank" class="institution-link">Universidad Tecnológica Nacional (UTN)</a>, Argentina</p>
                         <p>Comprehensive 5-year engineering program covering foundational computer science, algorithms, data structures, database management, networking, operating systems, and the full software development lifecycle. Provided a strong analytical and problem-solving base.</p>
                     </div>
                 </div>
@@ -386,22 +364,22 @@
                 <div class="education-section">
                     <h3>Certifications & Specializations</h3>
                     
-                    <div class="education-item">
+                    <div class="card education-card">
                         <div class="education-header">
-                            <h4>AWS Solutions Architect</h4>
-                            <span class="period">2020</span>
+                            <h4>Deep Learning Specialization</h4>
+                            <span class="period" data-full="2017 – 2018" data-short="2017 – 2018">2017 – 2018</span>
                         </div>
-                        <p class="institution">Amazon Web Services</p>
-                        <p>Comprehensive certification covering cloud architecture, security, scalability, and cost optimization on AWS platform.</p>
+                        <p class="institution"><a href="https://coursera.org/specializations/deep-learning" target="_blank" class="institution-link">Coursera (deeplearning.ai)</a></p>
+                        <p>In-depth specialization covering foundational and advanced neural networks, Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), model tuning strategies, and practical applications of deep learning.</p>
                     </div>
 
-                    <div class="education-item">
+                    <div class="card education-card">
                         <div class="education-header">
-                            <h4>Kubernetes Administrator</h4>
-                            <span class="period">2021</span>
+                            <h4>Self-Driving Car Engineer Nanodegree</h4>
+                            <span class="period" data-full="2016 – 2017" data-short="2016 – 2017">2016 – 2017</span>
                         </div>
-                        <p class="institution">Cloud Native Computing Foundation</p>
-                        <p>Hands-on certification for managing Kubernetes clusters, including deployment, scaling, and troubleshooting containerized applications.</p>
+                        <p class="institution"><a href="https://udacity.com/course/self-driving-car-engineer-nanodegree--nd013" target="_blank" class="institution-link">Udacity</a></p>
+                        <p>Hands-on program focused on the core components of autonomous vehicle technology, including computer vision, sensor fusion, localization, path planning, and control systems, utilizing relevant ML/DL techniques.</p>
                     </div>
                 </div>
             </div>
@@ -413,7 +391,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Contact Me</h3>
-                <button class="modal-close" onclick="closeContactForm()">&times;</button>
+                <button class="modal-close" onclick="closeContactForm()">
+                    <img src="assets/window-close.svg" alt="close" class="icon">
+                </button>
             </div>
             <form id="contact-form" class="contact-form">
                 <div class="form-group">

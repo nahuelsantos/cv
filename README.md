@@ -192,7 +192,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 📞 Contact
 
-- **Email**: nahuel@nahuelsantos.dev
+- **Email**: nahuel@nahuelsantos.com
 - **LinkedIn**: [linkedin.com/in/nahuelsantos](https://linkedin.com/in/nahuelsantos)
 - **GitHub**: [github.com/nahuelsantos](https://github.com/nahuelsantos)
 

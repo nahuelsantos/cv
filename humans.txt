@@ -1,6 +1,6 @@
 /* TEAM */
 Developer: Nahuel Santos
-Contact: nahuel [at] nahuelsantos.dev
+Contact: nahuel [at] nahuelsantos.com
 Location: Barcelona, Catalonia, Spain
 LinkedIn: https://linkedin.com/in/nahuelsantos
 GitHub: https://github.com/nahuelsantos

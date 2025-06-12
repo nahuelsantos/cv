@@ -10,7 +10,7 @@ services:
     #   - traefik
     # labels:
     #   - "traefik.enable=true"
-    #   - "traefik.http.routers.cv.rule=Host(`cv.nahuelsantos.dev`)"
+    #   - "traefik.http.routers.cv.rule=Host(`cv.nahuelsantos.com`)"
     #   - "traefik.http.routers.cv.entrypoints=websecure"
     #   - "traefik.http.routers.cv.tls.certresolver=letsencrypt"
     #   - "traefik.http.services.cv.loadbalancer.server.port=80"

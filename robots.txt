@@ -33,7 +33,7 @@ Disallow: /*.log
 Disallow: /.*
 
 # Sitemap location
-Sitemap: https://cv.nahuelsantos.dev/sitemap.xml
+Sitemap: https://cv.nahuelsantos.com/sitemap.xml
 
 # Crawl delay (optional, in seconds)
 Crawl-delay: 1 

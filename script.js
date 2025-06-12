@@ -9,6 +9,8 @@ class ThemeManager {
         this.applyTheme(this.theme);
         this.updateThemeIcon();
         this.bindEvents();
+        // Ensure icons are updated after DOM is fully loaded
+        setTimeout(() => this.updateIconsForTheme(), 100);
     }
 
     getSystemTheme() {
@@ -38,8 +40,25 @@ class ThemeManager {
     updateThemeIcon() {
         const icon = document.getElementById('theme-icon');
         if (icon) {
-            icon.src = this.theme === 'light' ? 'assets/moon-solid.svg' : 'assets/sun-solid.svg';
+            icon.src = this.theme === 'light' ? 'assets/moon.svg' : 'assets/sun.svg';
             icon.alt = this.theme === 'light' ? 'switch to dark mode' : 'switch to light mode';
+        }
+        
+        // Update other icons based on theme
+        this.updateIconsForTheme();
+    }
+
+    updateIconsForTheme() {
+        // Update envelope icon
+        const envelopeIcon = document.querySelector('img[alt="envelope"]');
+        if (envelopeIcon) {
+            envelopeIcon.src = this.theme === 'light' ? 'assets/envelope.svg' : 'assets/envelope-solid.svg';
+        }
+        
+        // Update download icon
+        const downloadIcon = document.querySelector('img[alt="download"]');
+        if (downloadIcon) {
+            downloadIcon.src = this.theme === 'light' ? 'assets/download-alt.svg' : 'assets/download-alt-solid.svg';
         }
     }
 
@@ -274,106 +293,12 @@ class SmoothScroll {
     }
 }
 
-// PDF Section Toggle (for customizable CV)
-class PDFCustomizer {
-    constructor() {
-        this.init();
-    }
-
-    init() {
-        this.createToggleControls();
-    }
-
-    createToggleControls() {
-        // Create a floating PDF customizer button
-        const pdfButton = document.createElement('button');
-        pdfButton.innerHTML = '<img src="assets/cog-solid.svg" alt="customize" class="icon" style="width: 1.2rem; height: 1.2rem;">';
-        pdfButton.className = 'pdf-customizer-toggle';
-        pdfButton.title = 'Customize CV for PDF';
-        pdfButton.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 56px;
-            height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: var(--shadow-hover);
-            transition: var(--transition);
-            font-size: 1.2rem;
-        `;
-
-        pdfButton.addEventListener('click', () => this.showCustomizer());
-        document.body.appendChild(pdfButton);
-    }
-
-    showCustomizer() {
-        // Create customizer modal
-        const modal = document.createElement('div');
-        modal.className = 'modal show';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3>Customize CV for PDF</h3>
-                    <button class="modal-close" onclick="this.closest('.modal').remove()">&times;</button>
-                </div>
-                <div style="padding: 1.5rem;">
-                    <p style="margin-bottom: 1rem; color: var(--text-secondary);">
-                        Select which sections to include in your PDF:
-                    </p>
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
-                            <input type="checkbox" checked data-section="experience"> Experience
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
-                            <input type="checkbox" checked data-section="skills"> Skills
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
-                            <input type="checkbox" checked data-section="projects"> Projects
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 0.5rem;">
-                            <input type="checkbox" checked data-section="education"> Education
-                        </label>
-                    </div>
-                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: flex-end;">
-                        <button class="btn btn-outline" onclick="this.closest('.modal').remove()">Cancel</button>
-                        <button class="btn btn-primary" onclick="window.print(); this.closest('.modal').remove();">
-                            Generate PDF
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        // Handle section toggles
-        modal.addEventListener('change', (e) => {
-            if (e.target.type === 'checkbox') {
-                const sectionId = e.target.dataset.section;
-                const section = document.getElementById(sectionId);
-                if (section) {
-                    section.style.display = e.target.checked ? 'block' : 'none';
-                }
-            }
-        });
-
-        document.body.appendChild(modal);
-    }
-}
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize components
     window.themeManager = new ThemeManager();
     window.contactForm = new ContactForm();
     window.smoothScroll = new SmoothScroll();
-    window.pdfCustomizer = new PDFCustomizer();
 
     // Add loading animation to external links
     document.addEventListener('click', (e) => {
@@ -402,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     // Observe elements for animation
-    document.querySelectorAll('.experience-item, .project-card, .skill-category, .education-item').forEach(el => {
+    document.querySelectorAll('.card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
