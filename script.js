@@ -40,25 +40,26 @@ class ThemeManager {
     updateThemeIcon() {
         const icon = document.getElementById('theme-icon');
         if (icon) {
-            icon.src = this.theme === 'light' ? 'assets/moon.svg' : 'assets/sun.svg';
-            icon.alt = this.theme === 'light' ? 'switch to dark mode' : 'switch to light mode';
+            const isLight = this.theme === 'light';
+            icon.src = isLight ? 'assets/moon.svg' : 'assets/sun.svg';
+            icon.alt = isLight ? 'switch to dark mode' : 'switch to light mode';
         }
-        
-        // Update other icons based on theme
         this.updateIconsForTheme();
     }
 
     updateIconsForTheme() {
+        const isLight = this.theme === 'light';
+        
         // Update envelope icon
         const envelopeIcon = document.querySelector('img[alt="envelope"]');
         if (envelopeIcon) {
-            envelopeIcon.src = this.theme === 'light' ? 'assets/envelope.svg' : 'assets/envelope-solid.svg';
+            envelopeIcon.src = isLight ? 'assets/envelope.svg' : 'assets/envelope-solid.svg';
         }
         
         // Update download icon
         const downloadIcon = document.querySelector('img[alt="download"]');
         if (downloadIcon) {
-            downloadIcon.src = this.theme === 'light' ? 'assets/download-alt.svg' : 'assets/download-alt-solid.svg';
+            downloadIcon.src = isLight ? 'assets/download-alt.svg' : 'assets/download-alt-solid.svg';
         }
     }
 
@@ -91,8 +92,8 @@ class ContactForm {
             this.form.addEventListener('submit', (e) => this.handleSubmit(e));
         }
 
-        // Close modal on backdrop click
         if (this.modal) {
+            // Close modal on backdrop click
             this.modal.addEventListener('click', (e) => {
                 if (e.target === this.modal) {
                     this.close();
@@ -102,7 +103,7 @@ class ContactForm {
 
         // Close modal on Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.modal && this.modal.classList.contains('show')) {
+            if (e.key === 'Escape' && this.modal?.classList.contains('show')) {
                 this.close();
             }
         });
@@ -191,8 +192,7 @@ class ContactForm {
     }
 
     isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
     showNotification(message, type = 'info') {
@@ -205,12 +205,18 @@ class ContactForm {
         `;
 
         // Add styles
+        const colors = {
+            success: '#4caf50',
+            error: '#f44336',
+            info: '#2196f3'
+        };
+
         notification.style.cssText = `
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 3000;
-            background: ${type === 'success' ? '#4caf50' : type === 'error' ? '#f44336' : '#2196f3'};
+            background: ${colors[type]};
             color: white;
             padding: 1rem 1.5rem;
             border-radius: 8px;
@@ -222,7 +228,7 @@ class ContactForm {
             animation: slideIn 0.3s ease;
         `;
 
-        // Add animation styles
+        // Add animation styles if not already present
         if (!document.getElementById('notification-styles')) {
             const styles = document.createElement('style');
             styles.id = 'notification-styles';
@@ -279,7 +285,7 @@ class SmoothScroll {
                 const targetElement = document.getElementById(targetId);
                 
                 if (targetElement) {
-                    const headerOffset = 80; // Account for fixed header if any
+                    const headerOffset = 80; // Account for fixed header
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -312,11 +318,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Add intersection observer for animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -324,7 +325,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, observerOptions);
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
 
     // Observe elements for animation
     document.querySelectorAll('.card').forEach(el => {
@@ -337,13 +341,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Global functions for HTML onclick handlers
 function openContactForm() {
-    if (window.contactForm) {
-        window.contactForm.open();
-    }
+    window.contactForm?.open();
 }
 
 function closeContactForm() {
-    if (window.contactForm) {
-        window.contactForm.close();
-    }
+    window.contactForm?.close();
 } 
