@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nahuel Santos - Software Engineer</title>
+    <meta name="description" content="Nahuel Santos - Software Engineer | Backend & System Architecture">
+    <meta name="theme-color" content="#2d1b69">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <!-- Manifest and humans -->
+    <link rel="manifest" href="manifest.json">
+    <link type="text/plain" rel="author" href="humans.txt">
+    
+    <!-- Pixel Icons -->
+    <link rel="stylesheet" href="pixel-icons.css">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <img src="assets/moon-solid.svg" alt="toggle theme" class="icon" id="theme-icon">
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="name">Nahuel Santos</h1>
+            <h2 class="title">Software Engineer | Backend & System Architecture</h2>
+            
+            <div class="location">
+                <img src="assets/location-pin.svg" alt="location" class="icon">
+                <span>Barcelona, Catalonia, Spain</span>
+            </div>
+            
+            <p class="summary">
+                A pragmatic and experienced engineering leader with over 15 years designing, building, and scaling complex software systems. Proven ability to architect robust solutions (.NET, Go, Microservices, AWS), lead technical initiatives across teams, and drive significant improvements in performance, reliability, and developer productivity. Adept at translating ambiguous business needs into concrete technical strategies, mentoring engineers, and fostering collaboration. Excels at tackling large-scale integration challenges, modernizing legacy systems, and taking ownership from concept through production deployment. Seeking a Staff (L6) or Principal (L7) Engineer role to leverage deep technical expertise and leadership to solve impactful problems.
+            </p>
+            
+            <div class="actions">
+                <button class="btn btn-outline" onclick="openContactForm()">
+                    <img src="assets/envelope-solid.svg" alt="envelope" class="icon">
+                    Contact Me
+                </button>
+                <a href="https://linkedin.com/in/nahuelsantos" target="_blank" class="btn btn-outline">
+                    <img src="assets/linkedin.svg" alt="linkedin" class="icon">
+                    LinkedIn
+                </a>
+                <a href="https://github.com/nahuelsantos" target="_blank" class="btn btn-outline">
+                    <img src="assets/github.svg" alt="github" class="icon">
+                    GitHub
+                </a>
+                <a href="assets/nahuel-santos-cv.pdf" download class="btn btn-primary">
+                    <img src="assets/download-alt-solid.svg" alt="download" class="icon">
+                    Download CV
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Experience -->
+    <section class="section" id="experience">
+        <div class="container">
+            <div class="section-title-with-icon">
+                <img src="assets/tech-companies.svg" alt="experience" class="section-icon">
+                <h2 class="section-title">Experience</h2>
+            </div>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Senior Software Engineer at AilyLabs</h3>
+                    <span class="period">Oct 2023 – Present</span>
+                </div>
+                <p class="location">Barcelona, Spain</p>
+                <ul class="responsibilities">
+                    <li>Leading backend development for a multi-tenant AI analytics platform using .NET Core, designing and implementing scalable microservices and core features consumed via a Backend-for-Frontend (BFF) architecture.</li>
+                    <li>Architecting solutions and providing technical guidance across multiple teams and senior engineers, ensuring consistency and quality.</li>
+                    <li>Proactively identifying and addressing performance bottlenecks and architectural limitations in existing services, managing the modernization of legacy components.</li>
+                    <li>Driving improvements in system observability using Datadog and Sentry within AWS.</li>
+                    <li>Contributing to frontend development (React/React Native) and managing multi-tenancy aspects via Piranha CMS.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Senior Software Engineer at Milestone Systems</h3>
+                    <span class="period">Oct 2022 – Oct 2023</span>
+                </div>
+                <p class="location">Barcelona, Spain</p>
+                <ul class="responsibilities">
+                    <li>Designed and developed microservices (Go, .NET, gRPC, REST) enabling integration between the core VMS product and 3rd party analytics tools, empowering external developers.</li>
+                    <li>Operated extensively within a Kubernetes environment, defining deployment strategies and optimizing distributed services for high throughput and reliability.</li>
+                    <li>Mentored two junior developers, guiding their technical growth and contributions.</li>
+                    <li>Contributed to team building as part of the events committee.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Senior Software Engineer at Xero</h3>
+                    <span class="period">Apr 2021 – Apr 2022</span>
+                </div>
+                <p class="location">Auckland, New Zealand</p>
+                <ul class="responsibilities">
+                    <li>Architected and delivered a mission-critical, microservices-based integration layer (using .NET Core, Go, Lambda, DynamoDB, S3) between Xero's accounting platform and Shopify, automating key financial workflows for numerous customers.</li>
+                    <li>Collaborated closely with multiple Xero teams to ensure seamless end-to-end functionality.</li>
+                    <li>Managed cloud infrastructure via Terraform, promoting Infrastructure as Code practices.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Solutions Developer / Lead / Architect at Sandfield</h3>
+                    <span class="period">Mar 2015 – Apr 2022</span>
+                </div>
+                <p class="location">Auckland, New Zealand</p>
+                <ul class="responsibilities">
+                    <li>Led development of a comprehensive transport management platform (.NET Framework/Core, SQL Server, React) serving 100+ enterprise clients across New Zealand and Australia.</li>
+                    <li>Architected and implemented a multi-tenant SaaS solution handling millions of transactions, ensuring 99.9% uptime and sub-second response times.</li>
+                    <li>Designed and built RESTful APIs and integration layers connecting with 50+ third-party systems (payment gateways, mapping services, government APIs).</li>
+                    <li>Led a team of 4 developers on a new transport product initiative, implementing automated CI/CD pipelines and database migration strategies.</li>
+                    <li>Championed engineering best practices through knowledge transfer sessions on SOLID principles, Clean Architecture, and Microservices patterns.</li>
+                    <li>Mentored interns as part of the company's official program.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Senior Software Engineer at Fiscalgis</h3>
+                    <span class="period">Aug 2013 – Sep 2014</span>
+                </div>
+                <p class="location">Buenos Aires, Argentina</p>
+                <ul class="responsibilities">
+                    <li>Led development (team of 5) for a GIS application (web/desktop) for government agencies using .NET Framework and Oracle DB, managing large cadastral datasets.</li>
+                    <li>Successfully designed and implemented an internal time-tracking tool (.NET, EF, SQL Server).</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Software Engineer / Lead at Infomeda</h3>
+                    <span class="period">Jun 2010 – Jun 2013</span>
+                </div>
+                <p class="location">Buenos Aires, Argentina</p>
+                <ul class="responsibilities">
+                    <li>Led a small team (3 developers) focused on integrations for advertising industry clients (.NET Framework, EF, SQL Server).</li>
+                    <li>Successfully developed and delivered a URL shortening product integrating with the Google+ API.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Junior Software Engineer at Snoop Consulting</h3>
+                    <span class="period">Oct 2009 – Jun 2010</span>
+                </div>
+                <p class="location">La Plata, Argentina</p>
+                <ul class="responsibilities">
+                    <li>Developed features for a financial industry client using Java, Spring, Hibernate, and DB2, gaining exposure to different technology stacks.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Junior Software Engineer / De Facto Lead at Softtek</h3>
+                    <span class="period">Oct 2008 – Oct 2009</span>
+                </div>
+                <p class="location">La Plata, Argentina</p>
+                <ul class="responsibilities">
+                    <li>Rapidly progressed from learning .NET/C#/ASP.NET Web Forms to taking lead responsibility (team of 3) for integrating with SAP via SOAP web services after the senior lead departed.</li>
+                    <li>Engaged directly with the client for requirements gathering for a major refrigeration industry client. Became a key technical referent for the team.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section section-alt" id="skills">
+        <div class="container">
+            <div class="section-title-with-icon">
+                <img src="assets/machine-learning.svg" alt="skills" class="section-icon">
+                <h2 class="section-title">Technical Skills</h2>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Core Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">C# (.NET Core/Framework)</span>
+                        <span class="skill-tag">Go</span>
+                        <span class="skill-tag">JavaScript/TypeScript</span>
+                        <span class="skill-tag">Java</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">React Native</span>
+                        <span class="skill-tag">ASP.NET Web Forms</span>
+                        <span class="skill-tag">HTML5/CSS3</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Backend & Architecture</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Microservices</span>
+                        <span class="skill-tag">gRPC</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">Entity Framework</span>
+                        <span class="skill-tag">Event-Driven Systems</span>
+                        <span class="skill-tag">Domain-Driven Design</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Cloud & DevOps</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">Azure DevOps</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">DynamoDB</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Oracle DB</span>
+                        <span class="skill-tag">DB2</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Observability</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Datadog</span>
+                        <span class="skill-tag">Sentry</span>
+                        <span class="skill-tag">Custom Monitoring</span>
+                        <span class="skill-tag">Logging</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+        <div class="container">
+                          <div class="section-title-with-icon">
+                  <img src="assets/programming.svg" alt="projects" class="section-icon">
+                  <h2 class="section-title">Projects</h2>
+              </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <img src="assets/programming.svg" alt="programming" class="icon">
+                        <h3>Don't Let Me Die</h3>
+                    </div>
+                    <p>A kind of fancy CLI quiz game where you keep your pet alive by answering questions correctly. Features interactive CLI menus, NPM package distribution, and questions fetched from Open Trivia Database. Built to practice creating NPM packages and interactive command-line interfaces.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">CLI</span>
+                        <span class="tech-tag">NPM</span>
+                        <span class="tech-tag">Inquirer</span>
+                        <span class="tech-tag">Chalk</span>
+                        <span class="tech-tag">Figlet</span>
+                    </div>
+                    <a href="https://github.com/nahuelsantos/dont-let-me-die" target="_blank" class="btn btn-primary">
+                        <img src="assets/github.svg" alt="github" class="icon">
+                        View on GitHub
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <img src="assets/tech-companies.svg" alt="tech companies" class="icon">
+                        <h3>Dinky Server</h3>
+                    </div>
+                    <p>A comprehensive self-hosted server setup with monitoring, security, and service management - all through a single interactive script. Features LGTMA stack (Loki, Grafana, Tempo, Metrics, Argus) for complete observability, Traefik for reverse proxy, Pi-hole for DNS, and automated deployment scripts.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Shell</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Grafana</span>
+                        <span class="tech-tag">Prometheus</span>
+                        <span class="tech-tag">Loki</span>
+                        <span class="tech-tag">Tempo</span>
+                        <span class="tech-tag">Traefik</span>
+                        <span class="tech-tag">Go</span>
+                        <span class="tech-tag">Makefile</span>
+                    </div>
+                    <a href="https://github.com/nahuelsantos/dinky-server" target="_blank" class="btn btn-primary">
+                        <img src="assets/github.svg" alt="github" class="icon">
+                        View on GitHub
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <img src="assets/chart-network.svg" alt="chart network" class="icon">
+                        <h3>Argus</h3>
+                    </div>
+                    <p>A LGTM stack validator and tester integrated with the monitoring infrastructure. Provides synthetic testing and validation for the entire observability stack, ensuring reliability and performance of monitoring systems.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Go</span>
+                        <span class="tech-tag">LGTM Stack</span>
+                        <span class="tech-tag">Monitoring</span>
+                        <span class="tech-tag">Testing</span>
+                        <span class="tech-tag">Observability</span>
+                    </div>
+                    <a href="https://github.com/nahuelsantos/argus" target="_blank" class="btn btn-primary">
+                        <img src="assets/github.svg" alt="github" class="icon">
+                        View on GitHub
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <img src="assets/futurism.svg" alt="futurism" class="icon">
+                        <h3>Personal Resume Website</h3>
+                    </div>
+                    <p>A modern, responsive resume website built with pure HTML, CSS, and JavaScript. Features dark/light mode, contact form integration, PDF download, and Docker deployment. Showcases professional experience and projects with a clean, mobile-friendly design.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Nginx</span>
+                        <span class="tech-tag">Makefile</span>
+                    </div>
+                    <a href="https://github.com/nahuelsantos/cv" target="_blank" class="btn btn-primary">
+                        <img src="assets/github.svg" alt="github" class="icon">
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section class="section section-alt" id="education">
+        <div class="container">
+            <div class="section-title-with-icon">
+                <img src="assets/chart-network.svg" alt="education" class="section-icon">
+                <h2 class="section-title">Education & Certifications</h2>
+            </div>
+            
+            <div class="education-grid">
+                <div class="education-section">
+                    <h3>Academic Education</h3>
+                    
+                    <div class="education-item">
+                        <div class="education-header">
+                            <h4>Master's Degree, Software Engineering</h4>
+                            <span class="period">2012 – 2014</span>
+                        </div>
+                        <p class="institution">Universidad Nacional de La Plata (UNLP), Argentina</p>
+                        <p>Focused on advanced software design patterns, architectural principles, software quality assurance, and project management methodologies, deepening the theoretical and practical aspects of building complex software systems.</p>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                            <h4>Engineering Degree, Systems Information Engineering</h4>
+                            <span class="period">2005 – 2011</span>
+                        </div>
+                        <p class="institution">Universidad Tecnológica Nacional (UTN), Argentina</p>
+                        <p>Comprehensive 5-year engineering program covering foundational computer science, algorithms, data structures, database management, networking, operating systems, and the full software development lifecycle. Provided a strong analytical and problem-solving base.</p>
+                    </div>
+                </div>
+
+                <div class="education-section">
+                    <h3>Certifications & Specializations</h3>
+                    
+                    <div class="education-item">
+                        <div class="education-header">
+                            <h4>AWS Solutions Architect</h4>
+                            <span class="period">2020</span>
+                        </div>
+                        <p class="institution">Amazon Web Services</p>
+                        <p>Comprehensive certification covering cloud architecture, security, scalability, and cost optimization on AWS platform.</p>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                            <h4>Kubernetes Administrator</h4>
+                            <span class="period">2021</span>
+                        </div>
+                        <p class="institution">Cloud Native Computing Foundation</p>
+                        <p>Hands-on certification for managing Kubernetes clusters, including deployment, scaling, and troubleshooting containerized applications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Contact Me</h3>
+                <button class="modal-close" onclick="closeContactForm()">&times;</button>
+            </div>
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeContactForm()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loading" style="display: none;">Sending...</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Nahuel Santos. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#experience">Experience</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#education">Education</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html> 

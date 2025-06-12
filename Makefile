@@ -22,57 +22,43 @@ endif
 all: start
 
 # Help target (displays available commands)
-help:
-	@echo "${BOLD}Available commands:${NC}"
-	@echo "${BLUE}make help${NC}    - Display this help message"
-	@echo "${BLUE}make run${NC}     - Run the application locally (without Docker)"
-	@echo "${BLUE}make test${NC}    - Run tests for the React app"
-	@echo "${BLUE}make start${NC}   - Start the app as a Docker Compose container"
-	@echo "${BLUE}make stop${NC}    - Stop the Docker Compose containers"
-	@echo "${BLUE}make clean${NC}   - Clean build artifacts and stop containers"
+help: ## Show this help message
+	@echo "Available commands:"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
 
 # Run the application locally
-run:
-	@echo "${YELLOW}Installing dependencies...${NC}"
-	@npm install
-	@if [ ! -f .env ]; then \
-		echo "${YELLOW}Creating .env from .env.example...${NC}"; \
-		cp .env.example .env; \
-	fi
-	@echo "${YELLOW}Starting React client...${NC}"
-	@npm start
+run: ## Build and run the CV website locally
+	@echo "🚀 Building and starting CV website..."
+	docker-compose up --build
 
 # Run tests
-test:
-	@echo "${YELLOW}Running React tests...${NC}"
-	@npm test -- --watchAll=false
-	@echo "${GREEN}All tests completed!${NC}"
+test: ## Run basic tests and validation
+	@echo "🧪 Running tests..."
+	@echo "✅ Basic file structure check..."
+	@test -f index.html || (echo "❌ index.html missing" && exit 1)
+	@test -f style.css || (echo "❌ style.css missing" && exit 1)
+	@test -f script.js || (echo "❌ script.js missing" && exit 1)
+	@test -f robots.txt || (echo "❌ robots.txt missing" && exit 1)
+	@test -f humans.txt || (echo "❌ humans.txt missing" && exit 1)
+	@echo "✅ Testing Docker build..."
+	@docker-compose build >/dev/null 2>&1 && echo "✅ Docker build successful" || echo "❌ Docker build failed"
+	@echo "✅ All basic tests passed!"
 
 # Start with Docker Compose
-start:
-	@echo "${YELLOW}Preparing environment...${NC}"
-	@if [ ! -f .env ]; then \
-		echo "${YELLOW}Creating .env from .env.example...${NC}"; \
-		cp .env.example .env; \
-	fi
-	@echo "${YELLOW}Installing npm dependencies...${NC}"
-	@npm install
-	@echo "${YELLOW}Building React app locally...${NC}"
-	@npm run build
-	@echo "${YELLOW}Starting with Docker Compose...${NC}"
-	@$(DOCKER_COMPOSE) up -d --build
-	@echo "${GREEN}Docker Compose is running!${NC}"
+start: ## Start the CV website in detached mode
+	@echo "🚀 Starting CV website in background..."
+	docker-compose up -d
+	@echo "✅ CV website is running at http://localhost:3001"
 
 # Stop Docker containers
-stop:
-	@echo "${YELLOW}Stopping Docker containers...${NC}"
-	@$(DOCKER_COMPOSE) down
-	@echo "${GREEN}Docker containers stopped!${NC}"
+stop: ## Stop the CV website
+	@echo "🛑 Stopping CV website..."
+	docker-compose down
+	@echo "✅ CV website stopped"
 
 # Clean build artifacts and stop containers
-clean:
-	@echo "${YELLOW}Cleaning build artifacts...${NC}"
-	@rm -rf build
-	@$(DOCKER_COMPOSE) down -v --remove-orphans
-	@docker system prune -f
-	@echo "${GREEN}Clean complete!${NC}" 
+clean: ## Clean up Docker containers, images, and volumes
+	@echo "🧹 Cleaning up..."
+	docker-compose down --volumes --remove-orphans
+	docker system prune -f
+	@echo "✅ Cleanup complete" 

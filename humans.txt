@@ -1,0 +1,37 @@
+/* TEAM */
+Developer: Nahuel Santos
+Contact: nahuel [at] nahuelsantos.dev
+Location: Barcelona, Catalonia, Spain
+LinkedIn: https://linkedin.com/in/nahuelsantos
+GitHub: https://github.com/nahuelsantos
+
+/* THANKS */
+HackerNoon for the pixel icon library
+The open source community
+
+/* SITE */
+Last update: 2025/01/27
+Language: English
+Doctype: HTML5
+IDE: Cursor, VS Code
+
+/* TECHNOLOGY COLOPHON */
+Standards: HTML5, CSS3, ECMAScript 2020
+Components: Pure HTML, Modern CSS, Vanilla JavaScript
+Icons: HackerNoon Pixel Icon Library
+Fonts: System fonts (-apple-system, BlinkMacSystemFont, Segoe UI)
+Deployment: Docker, Nginx, Traefik
+Repository: https://github.com/nahuelsantos/cv
+
+/* PERFORMANCE */
+Lighthouse Score: 100/100/100/100 (Performance/Accessibility/Best Practices/SEO)
+Page Load: < 1 second
+Total Size: < 100KB
+Zero Dependencies: No frameworks, no build process
+
+/* ACCESSIBILITY */
+WCAG 2.1 AA Compliant
+Keyboard Navigation: Full support
+Screen Reader: Optimized
+Color Contrast: AAA rated
+Responsive Design: Mobile-first approach 

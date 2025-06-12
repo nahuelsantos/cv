@@ -1,14 +1,13 @@
-FROM node:18-alpine
+FROM nginx:alpine
 
-WORKDIR /app
+# Copy static files
+COPY . /usr/share/nginx/html/
 
-# Install serve to host the static files
-RUN npm install -g serve
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expect build folder to be copied from host (built locally)
-COPY build /app/build
+# Expose port 80
+EXPOSE 80
 
-EXPOSE 3001
-
-# Start the static file server
-CMD ["serve", "-s", "build", "-l", "3001"] 
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"] 

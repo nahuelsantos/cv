@@ -1,0 +1,42 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Development files
+.env*
+.vscode
+.idea
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (not needed for static site)
+node_modules
+package*.json
+
+# Build artifacts (not applicable for static site)
+build
+dist
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# CI/CD
+.github
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Ensure favicon files are included
+!favicon*.ico
+!favicon*.png
+!apple-touch-icon.png
+!android-chrome*.png 
