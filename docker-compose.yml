@@ -5,7 +5,11 @@ services:
     restart: unless-stopped
     ports:
       - "3001:80"
-    # Uncomment the following for production with Traefik
+      
+    # Uncomment the following for production with Traefik  
+    #volumes:
+    #  - ./cv-data:/usr/share/nginx/html/assets/external:ro
+   
     # networks:
     #   - traefik
     # labels:
@@ -19,4 +23,4 @@ services:
 # Uncomment for production with Traefik
 # networks:
 #   traefik:
-#     external: true
+#     external: trueitoring labels

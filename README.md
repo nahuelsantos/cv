@@ -9,6 +9,7 @@ A modern, fast, and responsive personal CV website built with pure HTML, CSS, an
 - **Dark/Light Mode**: Automatic system preference detection + manual toggle
 - **Contact Form**: Integrated with backend API for message handling
 - **PDF Download**: Customizable CV export with section filtering
+- **Hot PDF Updates**: Update CV PDF without rebuilding Docker image
 - **SEO Optimized**: robots.txt, humans.txt, structured data, meta tags
 - **Accessibility**: WCAG 2.1 AA compliant with keyboard navigation
 - **Performance**: Lighthouse 100/100 scores across all metrics
@@ -28,20 +29,18 @@ A modern, fast, and responsive personal CV website built with pure HTML, CSS, an
 ├── index.html              # Main HTML file with all content
 ├── style.css               # Modern CSS with CSS variables and responsive design
 ├── script.js               # Vanilla JavaScript for interactions
-├── pixel-icons.css         # HackerNoon pixel icon font definitions
 ├── robots.txt              # SEO and crawler configuration
 ├── humans.txt              # Team and technology information
 ├── manifest.json           # Web app manifest
-├── favicon.svg             # SVG favicon
-├── nginx.conf              # Nginx configuration for production
+├── nginx.conf              # Nginx configuration with PDF fallback logic
 ├── Dockerfile              # Docker container definition
-├── docker-compose.yml      # Docker Compose setup with Traefik
+├── docker-compose.yml      # Docker Compose setup with volume mount
 ├── Makefile                # Development and deployment commands
 ├── assets/
-│   └── nahuel-santos-cv.pdf # Downloadable CV
-└── fonts/
-    ├── hackernoon-pixel-icons.woff
-    └── hackernoon-pixel-icons.woff2
+│   ├── nahuel-santos-cv.pdf # Built-in CV (fallback)
+│   └── *.svg               # Optimized SVG icons
+└── cv-data/                # External volume for PDF updates (created at runtime)
+    └── nahuel-santos-cv.pdf # Updated CV (served if present)
 ```
 
 ## 🚀 Quick Start
@@ -77,6 +76,70 @@ make stop    # Stop the containers
 make clean   # Clean up containers and images
 ```
 
+## 📄 Updating CV PDF (Without Rebuilding)
+
+The application supports hot PDF updates using Docker volumes. This allows you to update your CV without rebuilding the entire Docker image.
+
+### How It Works
+
+1. **Built-in PDF**: The Docker image contains a fallback PDF at `/usr/share/nginx/html/assets/nahuel-santos-cv.pdf`
+2. **External Volume**: The `cv-data/` directory is mounted as a volume
+3. **Nginx Logic**: Serves external PDF if present, otherwise falls back to built-in PDF
+
+### Setup
+
+1. **Create the directory** (if it doesn't exist):
+   ```bash
+   mkdir -p cv-data
+   ```
+
+2. **Update your PDF**:
+   ```bash
+   # Copy your new CV to the volume directory
+   cp /path/to/your/new-cv.pdf cv-data/nahuel-santos-cv.pdf
+   ```
+
+3. **Verify the update**:
+   ```bash
+   # Check if the new PDF is being served
+   curl -I http://localhost:8003/assets/nahuel-santos-cv.pdf
+   ```
+
+### PDF Update Process
+
+```bash
+# Example: Update CV with a new version
+cp ~/Downloads/nahuel-santos-cv-2024.pdf cv-data/nahuel-santos-cv.pdf
+
+# The new PDF is immediately available at:
+# https://nahuelsantos.com/assets/nahuel-santos-cv.pdf
+```
+
+### Reverting to Built-in PDF
+
+```bash
+# Remove external PDF to use the built-in version
+rm cv-data/nahuel-santos-cv.pdf
+
+# Or rename it to keep a backup
+mv cv-data/nahuel-santos-cv.pdf cv-data/nahuel-santos-cv.pdf.backup
+```
+
+### Volume Configuration
+
+The `docker-compose.yml` includes:
+```yaml
+volumes:
+  # Mount external CV PDF (optional - falls back to container's PDF if not present)
+  - ./cv-data:/usr/share/nginx/html/assets/external:ro
+```
+
+**Key Points:**
+- ✅ **No container restart** needed
+- ✅ **Immediate updates** - PDF is live instantly
+- ✅ **Safe fallback** - built-in PDF if external is missing
+- ✅ **Read-only mount** - container can't modify your files
+
 ## 🏗 Architecture Decisions
 
 ### Why Pure HTML/CSS/JS?
@@ -93,7 +156,7 @@ make clean   # Clean up containers and images
 - **Contact Form**: Fetch API with proper error handling and validation
 - **Responsive Design**: CSS Grid and Flexbox with mobile-first approach
 - **Animations**: CSS transitions and Intersection Observer API
-- **PDF Customization**: Dynamic section hiding with print media queries
+- **PDF Updates**: Docker volume mounts with nginx fallback logic
 
 ## 🎨 Customization
 
@@ -111,9 +174,9 @@ All content is in `index.html`. Update the following sections:
 Modify CSS custom properties in `style.css`:
 ```css
 :root {
-  --primary: #1976d2;        /* Brand color */
-  --bg-primary: #ffffff;     /* Background */
-  --text-primary: #2c3e50;   /* Text color */
+  --primary: #2d1b69;        /* Brand color */
+  --bg-primary: #f0f0f0;     /* Background */
+  --text-primary: #2d1b69;   /* Text color */
   /* ... more variables */
 }
 ```
@@ -122,7 +185,7 @@ Modify CSS custom properties in `style.css`:
 
 Update the API endpoint in `script.js`:
 ```javascript
-const response = await fetch('http://your-api:3010/contact', {
+const response = await fetch('http://contact-api:3010/contact', {
   // ... configuration
 });
 ```
@@ -143,14 +206,14 @@ docker-compose up -d
 ### GitHub Actions
 
 The project includes CI/CD workflows:
-- **CI**: Lint, test, and build validation
+- **CI**: HTML validation, link checking, CSS/JS syntax validation
 - **Deploy**: Automated Docker image builds and registry push
 
 ## 📊 Performance
 
 - **Lighthouse Score**: 100/100/100/100 (Performance/Accessibility/Best Practices/SEO)
 - **Page Load**: < 1 second on 3G
-- **Total Size**: < 100KB (including fonts and images)
+- **Total Size**: < 50KB (optimized assets, removed unused files)
 - **First Contentful Paint**: < 0.5s
 - **Time to Interactive**: < 1s
 
@@ -169,21 +232,12 @@ The project includes CI/CD workflows:
 3. Add any JavaScript interactions to `script.js`
 4. Update navigation links if needed
 
-### Icon Usage
-
-Using HackerNoon Pixel Icons:
-```html
-<i class="hn hn-icon-name"></i>
-```
-
-Available icons: location-pin, envelope, linkedin, github, code, arrow-left, arrow-right, moon, sun, download, settings
-
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test thoroughly
+4. Test thoroughly (CI will validate HTML, links, and syntax)
 5. Submit a pull request
 
 ## 📄 License

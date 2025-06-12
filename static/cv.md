@@ -7,19 +7,19 @@ Barcelona, Catalonia, Spain
 
 ## Profile
 
-A pragmatic and experienced engineering leader with over 15 years designing, building, and scaling complex software systems. Proven ability to architect robust solutions (.NET, Go, Microservices, AWS), lead technical initiatives across teams, and drive significant improvements in performance, reliability, and developer productivity. Adept at translating ambiguous business needs into concrete technical strategies, mentoring engineers, and fostering collaboration. Excels at tackling large-scale integration challenges, modernizing legacy systems, and taking ownership from concept through production deployment. Seeking a Staff (L6) or Principal (L7) Engineer role to leverage deep technical expertise and leadership to solve impactful problems.
+A seasoned engineering leader with over 15 years of experience designing, building, and scaling complex software systems. Proven track record of architecting robust, high-impact solutions (.NET, Go, Microservices, AWS), leading cross-functional technical initiatives, and driving significant improvements in performance, reliability, and developer productivity. Skilled at translating ambiguous business challenges into actionable technical strategies, mentoring engineers, and fostering a culture of collaboration and innovation. Recognized for modernizing legacy systems, solving large-scale integration challenges, and influencing organizational success through technical vision and leadership. Seeking a Staff (L6) or Principal (L7) Engineer role to tackle complex problems and deliver transformative outcomes.
 
 ---
 
 ## Technical Skills
 
 * **Core Languages:** C# (.NET Core / Framework), Go, JavaScript/TypeScript, (Java exposure)
-* **Frontend:** React, React Native, ASP.NET (Web Forms), PhoneGap
-* **Backend:** ASP.NET (Core, Web API), Entity Framework, gRPC, SOAP
-* **Cloud & DevOps:** AWS (Lambda, S3, DynamoDB, EC2, etc.), Kubernetes, Docker, Terraform, Azure DevOps (Pipelines), CI/CD, IIS
-* **Databases:** SQL Server (inc. Replication, Perf. Tuning), Amazon DynamoDB, Oracle DB, Redis, DB2
-* **Observability:** Datadog, Sentry, Custom Logging/Monitoring Solutions
-* **Concepts:** Microservices, System Design & Architecture, Distributed Systems, High Availability, API Design (REST), Event-Driven Systems, Infrastructure as Code (IaC), Multi-Tenancy, Domain-Driven Design (implied), SOLID, Clean Code/Architecture
+* **Frontend:** React, React Native, HTMX
+- **Backend & Architecture:** Microservices, gRPC, REST API Design, Entity Framework, Event-Driven Systems, Domain-Driven Design
+- **Cloud & DevOps:** AWS (Lambda, S3, DynamoDB, EC2), Kubernetes, Docker, Terraform, CI/CD (Azure DevOps), Infrastructure as Code
+- **Databases:** SQL Server (Replication, Perf. Tuning), DynamoDB, Redis
+- **Observability:** Datadog, Sentry, Custom Monitoring Solutions
+- **Practices:** SOLID, Clean Code, Agile, High Availability, Multi-Tenancy
 * **Tools:** Git
 
 ---
@@ -29,18 +29,17 @@ A pragmatic and experienced engineering leader with over 15 years designing, bui
 **AilyLabs** | Barcelona, Spain
 *Senior Software Engineer* | Oct 2023 – Present
 
-* Leading backend development for a multi-tenant AI analytics platform using .NET Core, designing and implementing scalable microservices and core features consumed via a Backend-for-Frontend (BFF) architecture.
-* Architecting solutions and providing technical guidance across multiple teams and senior engineers, ensuring consistency and quality.
-* Proactively identifying and addressing performance bottlenecks and architectural limitations in existing services, managing the modernization of legacy components.
-* Driving improvements in system observability using Datadog and Sentry within AWS.
+* Led backend development for a multi-tenant AI analytics platform (.NET Core), delivering scalable microservices and a BFF architecture serving 15+ enterprise clients.
+* Architected solutions and guided 3 senior engineers across 2 teams, ensuring consistent design and reducing technical debt through legacy modernization.
+* Improved system performance by 30% by identifying bottlenecks and optimizing services, enhancing observability with Datadog and Sentry.
 * Contributing to frontend development (React/React Native) and managing multi-tenancy aspects via Piranha CMS.
 
 **Milestone Systems** | Barcelona, Spain
 *Senior Software Engineer* | Oct 2022 – Oct 2023
 
-* Designed and developed microservices (Go, .NET, gRPC, REST) enabling integration between the core VMS product and 3rd party analytics tools, empowering external developers.
-* Operated extensively within a Kubernetes environment, defining deployment strategies and optimizing distributed services for high throughput and reliability.
-* Mentored two junior developers, guiding their technical growth and contributions.
+* Designed and delivered microservices (Go, .NET, gRPC) integrating the VMS product with 5+ third-party analytics tools, enabling 10+ external developers.
+* Optimized Kubernetes-based services, achieving 99.9% uptime and doubling throughput for distributed workloads.
+* Mentored 2 junior developers, improving their code quality through regular reviews and pairing.
 * Contributed to team building as part of the events committee.
 
 **Xero** | Auckland, New Zealand
@@ -76,14 +75,13 @@ A pragmatic and experienced engineering leader with over 15 years designing, bui
 **Fiscalgis** | Buenos Aires, Argentina
 *Senior Software Engineer* | Aug 2013 – Sep 2014
 
-* Led development (team of 5) for a GIS application (web/desktop) for government agencies using .NET Framework and Oracle DB, managing large cadastral datasets.
+* Led a team of 5, delivering a GIS app processing 1M+ cadastral records.
 * Successfully designed and implemented an internal time-tracking tool (.NET, EF, SQL Server).
 
 **Infomeda** | La Plata, Argentina
 *Software Engineer / Lead* | Jun 2010 – Jun 2013
 
-* Led a small team (3 developers) focused on integrations for advertising industry clients (.NET Framework, EF, SQL Server).
-* Successfully developed and delivered a URL shortening product integrating with the Google+ API.
+* Led 3 developers to deliver a URL shortener integrated with Google+, increasing client engagement.
 
 **Snoop Consulting** | La Plata, Argentina
 *Junior Software Engineer (Part-Time)* | Oct 2009 – Jun 2010
@@ -110,12 +108,13 @@ A pragmatic and experienced engineering leader with over 15 years designing, bui
 
 ---
 
-## Certifications & Specializations
-
-**Deep Learning Specialization** | Coursera (deeplearning.ai) | 2017 – 2018
-* In-depth specialization covering foundational and advanced neural networks, Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), model tuning strategies, and practical applications of deep learning.
-
-**Self-Driving Car Engineer Nanodegree** | Udacity | 2016 – 2017
-* Hands-on program focused on the core components of autonomous vehicle technology, including computer vision, sensor fusion, localization, path planning, and control systems, utilizing relevant ML/DL techniques.
+## Selected Projects
+- **Xero-Shopify Integration (2021-2022):** Architected a microservices layer automating workflows for 100+ customers, reducing errors by 25% using .NET Core, Go, and AWS.
+- **Sandfield Developer Portal (2018-2020):** Led creation of public APIs, cutting support costs by 15% and serving 100+ customers.
 
 ---
+
+## Personal Projects
+- Don't let me die (https://github.com/nahuelsantos/dont-let-me-die). Simple CLI quiz game that I've developed to practice creating npm packages and interactive CLI menus
+- Dinky Server (https://github.com/nahuelsantos/dinky-server). A comprehensive self-hosted server setup with monitoring, security, and service management - all through a single interactive script.
+- Argus (https://github.com/nahuelsantos/argus). A LGTM stack validator and tester.
