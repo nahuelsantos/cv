@@ -37,9 +37,14 @@ jobs:
           exit 1
         fi
         
-        # Check PDF exists
-        if [ ! -f "assets/nahuel-santos-cv.pdf" ]; then
-          echo "❌ CV PDF not found"
+        # Check template files exist
+        if [ ! -f "data/cv.template.json" ]; then
+          echo "❌ CV template JSON not found"
+          exit 1
+        fi
+        
+        if [ ! -f "data/cv.template.pdf" ]; then
+          echo "❌ CV template PDF not found"
           exit 1
         fi
         
