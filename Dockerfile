@@ -3,6 +3,7 @@ FROM nginx:alpine
 # Copy website files
 COPY index.html style.css script.js /usr/share/nginx/html/
 COPY data/cv.json /usr/share/nginx/html/
+COPY data/cv.template.pdf /usr/share/nginx/html/assets/cv.pdf
 COPY assets/ /usr/share/nginx/html/assets/
 
 # Copy nginx configuration

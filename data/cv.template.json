@@ -1,0 +1,138 @@
+{
+  "name": "John Doe",
+  "title": "Software Engineer",
+  "location": "Quilmes, Argentina",
+  "summary": "Experienced software engineer with 10+ years designing, building, and scaling complex software systems. Proven ability to architect robust solutions, lead technical initiatives across teams, and drive significant improvements in performance, reliability, and developer productivity. Adept at translating business needs into technical strategies, mentoring engineers, and fostering collaboration. Excels at tackling large-scale integration challenges, modernizing legacy systems, and taking ownership from concept through production deployment.",
+  "contact": {
+    "email": "john.doe@example.com",
+    "linkedin": "https://linkedin.com/in/johndoe",
+    "github": "https://github.com/johndoe"
+  },
+  "experience": [
+    {
+      "company": "Tech Innovations Inc",
+      "company_url": "https://techinnovations.com",
+      "role": "Senior Software Engineer",
+      "period": "Jan 2020 – Present",
+      "location": "San Francisco, CA",
+      "responsibilities": [
+        "Leading backend development for a multi-tenant SaaS platform using modern technologies, designing and implementing scalable microservices architecture.",
+        "Architecting solutions and providing technical guidance across multiple teams, ensuring consistency and quality standards.",
+        "Proactively identifying and addressing performance bottlenecks and architectural limitations in existing services.",
+        "Driving improvements in system observability and monitoring using industry-standard tools.",
+        "Contributing to frontend development and managing deployment processes."
+      ]
+    },
+    {
+      "company": "Digital Solutions Corp",
+      "company_url": "https://digitalsolutions.com",
+      "role": "Software Engineer",
+      "period": "Jun 2017 – Dec 2019",
+      "location": "Austin, TX",
+      "responsibilities": [
+        "Designed and developed microservices enabling integration between core products and third-party tools.",
+        "Operated within containerized environments, defining deployment strategies and optimizing distributed services.",
+        "Mentored junior developers, guiding their technical growth and contributions.",
+        "Contributed to team building and engineering culture initiatives."
+      ]
+    },
+    {
+      "company": "StartupXYZ",
+      "company_url": "https://startupxyz.com",
+      "role": "Full Stack Developer",
+      "period": "Mar 2015 – May 2017",
+      "location": "Remote",
+      "responsibilities": [
+        "Built and maintained web applications using modern frameworks and cloud technologies.",
+        "Collaborated with cross-functional teams to deliver features and improvements.",
+        "Implemented automated testing and deployment pipelines."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "title": "Core Languages",
+      "skills": ["JavaScript/TypeScript", "Python", "Java"]
+    },
+    {
+      "title": "Frontend",
+      "skills": ["React", "Vue.js", "HTML5/CSS3"]
+    },
+    {
+      "title": "Backend & Architecture",
+      "skills": ["Node.js", "REST APIs", "Microservices", "GraphQL"]
+    },
+    {
+      "title": "Cloud & DevOps",
+      "skills": ["AWS", "Docker", "Kubernetes", "CI/CD", "Terraform"]
+    },
+    {
+      "title": "Databases",
+      "skills": ["PostgreSQL", "MongoDB", "Redis"]
+    },
+    {
+      "title": "Tools & Monitoring",
+      "skills": ["Git", "Datadog", "Grafana", "Jest"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "E-Commerce Platform",
+      "description": "A full-stack e-commerce solution with real-time inventory management, payment processing, and analytics dashboard. Built with modern technologies and deployed on cloud infrastructure.",
+      "tags": ["React", "Node.js", "PostgreSQL", "AWS", "Stripe API"],
+      "link": "https://github.com/johndoe/ecommerce-platform"
+    },
+    {
+      "name": "Task Management API",
+      "description": "RESTful API for task management with user authentication, real-time notifications, and comprehensive documentation. Features automated testing and deployment pipelines.",
+      "tags": ["Python", "FastAPI", "Docker", "PostgreSQL", "Redis"],
+      "link": "https://github.com/johndoe/task-api"
+    },
+    {
+      "name": "Data Visualization Dashboard",
+      "description": "Interactive dashboard for business metrics visualization with real-time data updates, custom charts, and export functionality. Optimized for performance and mobile responsiveness.",
+      "tags": ["Vue.js", "D3.js", "WebSocket", "MongoDB"],
+      "link": "https://github.com/johndoe/data-dashboard"
+    },
+    {
+      "name": "Personal Portfolio Website",
+      "description": "Modern, responsive portfolio website built with pure HTML, CSS, and JavaScript. Features dark/light mode, contact form integration, and optimized performance.",
+      "tags": ["HTML5", "CSS3", "JavaScript"],
+      "link": "https://github.com/johndoe/portfolio"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Science, Computer Science",
+      "period": "2013 – 2015",
+      "institution": "Stanford University",
+      "institution_url": "https://stanford.edu",
+      "location": "California, USA",
+      "details": "Focused on distributed systems, machine learning, and software engineering principles. Completed thesis on scalable web architectures."
+    },
+    {
+      "degree": "Bachelor of Science, Computer Engineering",
+      "period": "2009 – 2013",
+      "institution": "University of California, Berkeley",
+      "institution_url": "https://berkeley.edu",
+      "location": "California, USA",
+      "details": "Comprehensive program covering computer science fundamentals, algorithms, data structures, and software development. Graduated Magna Cum Laude."
+    },
+    {
+      "degree": "AWS Certified Solutions Architect",
+      "period": "2021",
+      "institution": "Amazon Web Services",
+      "institution_url": "https://aws.amazon.com/certification/",
+      "location": "",
+      "details": "Professional certification demonstrating expertise in designing distributed systems on AWS platform."
+    },
+    {
+      "degree": "Certified Kubernetes Administrator (CKA)",
+      "period": "2020",
+      "institution": "Cloud Native Computing Foundation",
+      "institution_url": "https://cncf.io/certification/cka/",
+      "location": "",
+      "details": "Hands-on certification covering Kubernetes cluster administration, networking, security, and troubleshooting."
+    }
+  ]
+} 

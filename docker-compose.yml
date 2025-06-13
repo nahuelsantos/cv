@@ -8,8 +8,8 @@ services:
       
     # Uncomment the following for production with Traefik  
     #volumes:
-    #  - ./cv-data:/usr/share/nginx/html/assets/external:ro
-   
+    #  - ./data:/usr/share/nginx/html/assets/external:ro
+    
     # networks:
     #   - traefik
     # labels:
