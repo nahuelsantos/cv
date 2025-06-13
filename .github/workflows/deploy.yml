@@ -25,7 +25,7 @@ jobs:
         echo "Validating required files..."
         
         # Check all required files exist
-        required_files=("index.html" "style.css" "script.js" "assets/nahuel-santos-cv.pdf" "Dockerfile" "nginx.conf")
+        required_files=("index.html" "style.css" "script.js" "data/cv.template.json" "data/cv.template.pdf" "Dockerfile" "nginx.conf")
         
         for file in "${required_files[@]}"; do
           if [ ! -f "$file" ]; then
@@ -82,5 +82,5 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Files included in container:" >> $GITHUB_STEP_SUMMARY
         echo "- ✅ Static HTML/CSS/JS files" >> $GITHUB_STEP_SUMMARY
-        echo "- ✅ CV PDF (assets/nahuel-santos-cv.pdf)" >> $GITHUB_STEP_SUMMARY
+        echo "- ✅ CV template files (JSON and PDF)" >> $GITHUB_STEP_SUMMARY
         echo "- ✅ All assets and icons" >> $GITHUB_STEP_SUMMARY 

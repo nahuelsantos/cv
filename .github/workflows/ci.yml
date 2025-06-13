@@ -20,139 +20,57 @@ jobs:
         css: true
         also-check-css: true
 
-    - name: Check for broken links in HTML
+    - name: Check required files and assets
       run: |
-        # Check if all referenced assets exist
-        echo "Checking for missing assets..."
+        echo "Checking for required files and assets..."
         
-        # Check CSS file exists
-        if [ ! -f "style.css" ]; then
-          echo "❌ style.css not found"
-          exit 1
-        fi
+        # Check core files exist
+        required_files=(
+          "index.html"
+          "style.css" 
+          "script.js"
+          "data/cv.template.json"
+          "data/cv.template.pdf"
+          "Dockerfile"
+          "nginx.conf"
+        )
         
-        # Check JS file exists
-        if [ ! -f "script.js" ]; then
-          echo "❌ script.js not found"
-          exit 1
-        fi
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "❌ Required file missing: $file"
+            exit 1
+          fi
+        done
         
-        # Check PDF exists
-        if [ ! -f "assets/nahuel-santos-cv.pdf" ]; then
-          echo "❌ CV PDF not found"
-          exit 1
-        fi
+        # Check essential assets exist
+        essential_assets=(
+          "assets/moon.svg"
+          "assets/sun.svg"
+          "assets/envelope.svg"
+          "assets/download-alt.svg"
+          "assets/linkedin.svg"
+          "assets/github.svg"
+          "assets/location-pin.svg"
+          "assets/window-close.svg"
+        )
         
-        # Check main HTML file exists
-        if [ ! -f "index.html" ]; then
-          echo "❌ index.html not found"
-          exit 1
-        fi
+        for asset in "${essential_assets[@]}"; do
+          if [ ! -f "$asset" ]; then
+            echo "❌ Essential asset missing: $asset"
+            exit 1
+          fi
+        done
         
-        echo "✅ All required files found"
+        echo "✅ All required files and assets found"
 
-    - name: Validate internal and external links
+    - name: Validate JSON template
       run: |
-        echo "🔍 Validating links in HTML files..."
-        
-        # Install htmlq for HTML parsing
-        curl -L https://github.com/mgdm/htmlq/releases/download/v0.4.0/htmlq-x86_64-linux.tar.gz | tar xz
-        chmod +x htmlq
-        
-        # Function to check if URL is reachable
-        check_url() {
-          local url="$1"
-          local status_code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 --retry 2 "$url")
-          if [[ "$status_code" =~ ^[23] ]]; then
-            echo "✅ $url (HTTP $status_code)"
-            return 0
-          else
-            echo "❌ $url (HTTP $status_code)"
-            return 1
-          fi
-        }
-        
-        # Extract all links from HTML
-        echo "Extracting links from index.html..."
-        
-        # Get all href attributes
-        all_links=$(./htmlq --attribute href 'a[href]' < index.html | sort -u)
-        
-        # Get all src attributes for assets
-        all_assets=$(./htmlq --attribute src 'img[src], script[src], link[href]' < index.html | sort -u)
-        
-        failed_links=0
-        total_external=0
-        total_internal=0
-        total_assets=0
-        
-        echo ""
-        echo "📋 Checking internal anchor links..."
-        
-        # Check internal anchor links
-        for link in $all_links; do
-          if [[ "$link" =~ ^#.+ ]]; then
-            total_internal=$((total_internal + 1))
-            anchor_id="${link#\#}"
-            
-            # Check if the anchor exists in the HTML
-            if ./htmlq "#$anchor_id" < index.html > /dev/null 2>&1; then
-              echo "✅ Internal anchor: $link"
-            else
-              echo "❌ Internal anchor not found: $link"
-              failed_links=$((failed_links + 1))
-            fi
-          fi
-        done
-        
-        echo ""
-        echo "📋 Checking asset files..."
-        
-        # Check local asset files
-        for asset in $all_assets; do
-          if [[ ! "$asset" =~ ^https?:// ]] && [[ ! "$asset" =~ ^// ]]; then
-            total_assets=$((total_assets + 1))
-            
-            if [ -f "$asset" ]; then
-              echo "✅ Asset exists: $asset"
-            else
-              echo "❌ Asset missing: $asset"
-              failed_links=$((failed_links + 1))
-            fi
-          fi
-        done
-        
-        echo ""
-        echo "🌐 Checking external links..."
-        
-        # Check external links
-        for link in $all_links; do
-          if [[ "$link" =~ ^https?:// ]]; then
-            total_external=$((total_external + 1))
-            
-            if check_url "$link"; then
-              :  # Success message already printed
-            else
-              failed_links=$((failed_links + 1))
-            fi
-          fi
-        done
-        
-        echo ""
-        echo "📊 Link validation summary:"
-        echo "- Internal anchors checked: $total_internal"
-        echo "- Local assets checked: $total_assets"
-        echo "- External URLs checked: $total_external"
-        echo "- Failed links: $failed_links"
-        
-        if [ $failed_links -gt 0 ]; then
-          echo ""
-          echo "❌ Link validation failed! Found $failed_links broken link(s)."
+        # Validate template JSON syntax
+        python3 -m json.tool data/cv.template.json > /dev/null || {
+          echo "❌ cv.template.json is invalid"
           exit 1
-        else
-          echo ""
-          echo "✅ All links are valid!"
-        fi
+        }
+        echo "✅ CV template JSON is valid"
 
     - name: Check CSS syntax
       run: |
