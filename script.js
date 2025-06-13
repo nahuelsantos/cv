@@ -337,6 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
+
+    populateCVFromJSON();
 });
 
 // Global functions for HTML onclick handlers
@@ -346,4 +348,105 @@ function openContactForm() {
 
 function closeContactForm() {
     window.contactForm?.close();
+}
+
+// JSON-driven CV population
+function populateCVFromJSON() {
+  fetch('cv-data.json')
+    .then(res => res.json())
+    .then(data => {
+      // Header
+      document.querySelector('.name').textContent = data.name;
+      document.querySelector('.title').textContent = data.title;
+      document.querySelector('.location').innerHTML = '<img src="assets/location-pin.svg" alt="location" class="icon"> ' + data.location;
+      document.querySelector('.summary').textContent = data.summary;
+
+      // Actions (contact, LinkedIn, GitHub, Download CV)
+      const actions = document.querySelector('.actions');
+      actions.innerHTML = `
+        <button class="btn btn-outline" onclick="openContactForm()">
+          <img src="assets/envelope.svg" alt="envelope" class="icon"> Contact Me
+        </button>
+        <a href="${data.contact.linkedin}" target="_blank" class="btn btn-outline">
+          <img src="assets/linkedin.svg" alt="linkedin" class="icon"> LinkedIn
+        </a>
+        <a href="${data.contact.github}" target="_blank" class="btn btn-outline">
+          <img src="assets/github.svg" alt="github" class="icon"> GitHub
+        </a>
+        <a href="assets/nahuel-santos-cv.pdf" download class="btn btn-outline">
+          <img src="assets/download-alt.svg" alt="download" class="icon"> Download CV
+        </a>
+      `;
+
+      // Experience
+      const expContainer = document.querySelector('#experience .container');
+      // Remove all .card.experience-card
+      expContainer.querySelectorAll('.card.experience-card').forEach(el => el.remove());
+      data.experience.forEach(job => {
+        const card = document.createElement('div');
+        card.className = 'card experience-card';
+        card.innerHTML = `
+          <div class="experience-header">
+            <h3>${job.role} @ <a href="${job.company_url}" target="_blank" class="company-link">${job.company}</a></h3>
+            <span class="period">${job.period}</span>
+          </div>
+          <p class="location">${job.location}</p>
+          <ul class="responsibilities">
+            ${job.responsibilities.map(r => `<li>${r}</li>`).join('')}
+          </ul>
+        `;
+        expContainer.appendChild(card);
+      });
+
+      // Skills
+      const skillsGrid = document.querySelector('.skills-grid');
+      skillsGrid.innerHTML = '';
+      data.skills.forEach(group => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h3>${group.title}</h3>
+          <div class="tag-container">
+            ${group.skills.map(skill => `<span class="tag">${skill}</span>`).join('')}
+          </div>
+        `;
+        skillsGrid.appendChild(card);
+      });
+
+      // Projects
+      const projectsGrid = document.querySelector('.projects-grid');
+      projectsGrid.innerHTML = '';
+      data.projects.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-header"><h3>${project.name}</h3></div>
+          <p>${project.description}</p>
+          <div class="tag-container">
+            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+          </div>
+          <a href="${project.link}" target="_blank" class="btn btn-outline">
+            <img src="assets/github.svg" alt="github" class="icon"> View on GitHub
+          </a>
+        `;
+        projectsGrid.appendChild(card);
+      });
+
+      // Education
+      const eduGrid = document.querySelector('.education-grid');
+      eduGrid.innerHTML = '';
+      data.education.forEach(edu => {
+        const card = document.createElement('div');
+        card.className = 'card education-card';
+        card.innerHTML = `
+          <div class="education-header">
+            <h4>${edu.degree}</h4>
+            <span class="period">${edu.period}</span>
+          </div>
+          <p class="institution">${edu.institution}${edu.location ? ', ' + edu.location : ''}</p>
+          <p>${edu.details}</p>
+        `;
+        eduGrid.appendChild(card);
+      });
+    });
 } 

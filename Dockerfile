@@ -1,7 +1,9 @@
 FROM nginx:alpine
 
-# Copy static files
-COPY . /usr/share/nginx/html/
+# Copy website files
+COPY index.html style.css script.js /usr/share/nginx/html/
+COPY data/cv.json /usr/share/nginx/html/
+COPY assets/ /usr/share/nginx/html/assets/
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf

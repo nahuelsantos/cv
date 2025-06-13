@@ -61,7 +61,7 @@
                     <img src="assets/github.svg" alt="github" class="icon">
                     GitHub
                 </a>
-                <a href="assets/nahuel-santos-cv.pdf" download class="btn btn-outline">
+                <a href="assets/cv.pdf" id="download-cv" class="btn btn-outline">
                     <img src="assets/download-alt.svg" alt="download" class="icon">
                     Download CV
                 </a>
@@ -438,5 +438,177 @@
 
     <!-- Scripts -->
     <script src="script.js"></script>
+    <script>
+        // Load and populate CV data from JSON
+        async function loadCVData() {
+            try {
+                const response = await fetch('cv.json');
+                const data = await response.json();
+                
+                // Populate header
+                document.querySelector('.name').textContent = data.name;
+                document.querySelector('.title').textContent = data.title;
+                document.querySelector('.location').innerHTML = `
+                    <img src="assets/location-pin.svg" alt="location" class="icon">
+                    ${data.location}
+                `;
+                document.querySelector('.summary').textContent = data.summary;
+                
+                // Update contact links
+                document.querySelector('a[href*="linkedin"]').href = data.contact.linkedin;
+                document.querySelector('a[href*="github"]').href = data.contact.github;
+                
+                // Setup dynamic PDF download with proper filename
+                const downloadLink = document.getElementById('download-cv');
+                const nameParts = data.name.toLowerCase().split(' ');
+                const firstName = nameParts[0];
+                const lastName = nameParts[nameParts.length - 1];
+                const filename = `${firstName}-${lastName}-cv.pdf`;
+                
+                downloadLink.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    try {
+                        const response = await fetch('assets/cv.pdf');
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        document.body.removeChild(a);
+                    } catch (error) {
+                        console.error('Error downloading PDF:', error);
+                        // Fallback to direct link
+                        window.open('assets/cv.pdf', '_blank');
+                    }
+                });
+                
+                // Populate experience section
+                const experienceContainer = document.querySelector('#experience .container');
+                const experienceCards = experienceContainer.querySelectorAll('.experience-card');
+                
+                // Remove existing experience cards
+                experienceCards.forEach(card => card.remove());
+                
+                // Add new experience cards from JSON
+                data.experience.forEach(exp => {
+                    const expCard = document.createElement('div');
+                    expCard.className = 'card experience-card';
+                    expCard.innerHTML = `
+                        <div class="experience-header">
+                            <h3>${exp.role} @ <a href="${exp.company_url}" target="_blank" class="company-link">${exp.company}</a></h3>
+                            <span class="period" data-full="${exp.period}" data-short="${exp.period.replace(/ – /, ' - ')}">${exp.period}</span>
+                        </div>
+                        <p class="location">${exp.location}</p>
+                        <ul class="responsibilities">
+                            ${exp.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                        </ul>
+                    `;
+                    experienceContainer.appendChild(expCard);
+                });
+                
+                // Populate skills section
+                const skillsGrid = document.querySelector('.skills-grid');
+                skillsGrid.innerHTML = '';
+                
+                data.skills.forEach(skillGroup => {
+                    const skillCard = document.createElement('div');
+                    skillCard.className = 'card';
+                    skillCard.innerHTML = `
+                        <h3>${skillGroup.title}</h3>
+                        <div class="tag-container">
+                            ${skillGroup.skills.map(skill => `<span class="tag">${skill}</span>`).join('')}
+                        </div>
+                    `;
+                    skillsGrid.appendChild(skillCard);
+                });
+                
+                // Populate projects section
+                const projectsGrid = document.querySelector('.projects-grid');
+                projectsGrid.innerHTML = '';
+                
+                data.projects.forEach(project => {
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'card';
+                    projectCard.innerHTML = `
+                        <div class="card-header">
+                            <h3>${project.name}</h3>
+                        </div>
+                        <p>${project.description}</p>
+                        <div class="tag-container">
+                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <a href="${project.link}" target="_blank" class="btn btn-outline">
+                            <img src="assets/github.svg" alt="github" class="icon">
+                            View on GitHub
+                        </a>
+                    `;
+                    projectsGrid.appendChild(projectCard);
+                });
+                
+                // Populate education section
+                const educationGrid = document.querySelector('.education-grid');
+                educationGrid.innerHTML = '';
+                
+                // Separate academic and certifications
+                const academic = data.education.filter(edu => edu.degree.includes('Degree'));
+                const certifications = data.education.filter(edu => !edu.degree.includes('Degree'));
+                
+                // Academic section
+                if (academic.length > 0) {
+                    const academicSection = document.createElement('div');
+                    academicSection.className = 'education-section';
+                    academicSection.innerHTML = '<h3>Academic Education</h3>';
+                    
+                    academic.forEach(edu => {
+                        const eduCard = document.createElement('div');
+                        eduCard.className = 'card education-card';
+                        eduCard.innerHTML = `
+                            <div class="education-header">
+                                <h4>${edu.degree}</h4>
+                                <span class="period" data-full="${edu.period}" data-short="${edu.period.replace(/ – /, ' - ')}">${edu.period}</span>
+                            </div>
+                            <p class="institution"><a href="${edu.institution_url}" target="_blank" class="institution-link">${edu.institution}</a>${edu.location ? `, ${edu.location}` : ''}</p>
+                            <p>${edu.details}</p>
+                        `;
+                        academicSection.appendChild(eduCard);
+                    });
+                    
+                    educationGrid.appendChild(academicSection);
+                }
+                
+                // Certifications section
+                if (certifications.length > 0) {
+                    const certsSection = document.createElement('div');
+                    certsSection.className = 'education-section';
+                    certsSection.innerHTML = '<h3>Certifications & Specializations</h3>';
+                    
+                    certifications.forEach(edu => {
+                        const eduCard = document.createElement('div');
+                        eduCard.className = 'card education-card';
+                        eduCard.innerHTML = `
+                            <div class="education-header">
+                                <h4>${edu.degree}</h4>
+                                <span class="period" data-full="${edu.period}" data-short="${edu.period.replace(/ – /, ' - ')}">${edu.period}</span>
+                            </div>
+                            <p class="institution"><a href="${edu.institution_url}" target="_blank" class="institution-link">${edu.institution}</a>${edu.location ? `, ${edu.location}` : ''}</p>
+                            <p>${edu.details}</p>
+                        `;
+                        certsSection.appendChild(eduCard);
+                    });
+                    
+                    educationGrid.appendChild(certsSection);
+                }
+                
+            } catch (error) {
+                console.error('Error loading CV data:', error);
+            }
+        }
+        
+        // Load data when DOM is ready
+        document.addEventListener('DOMContentLoaded', loadCVData);
+    </script>
 </body>
 </html> 

@@ -1,0 +1,153 @@
+{
+  "name": "Nahuel Santos",
+  "title": "Software Engineer",
+  "location": "Barcelona, Catalonia, Spain",
+  "summary": "A pragmatic and experienced engineering leader with over 15 years designing, building, and scaling complex software systems. Proven ability to architect robust solutions (.NET, Go, Microservices, AWS), lead technical initiatives across teams, and drive significant improvements in performance, reliability, and developer productivity. Adept at translating ambiguous business needs into concrete technical strategies, mentoring engineers, and fostering collaboration. Excels at tackling large-scale integration challenges, modernizing legacy systems, and taking ownership from concept through production deployment. Seeking a Staff (L6) or Principal (L7) Engineer role to leverage deep technical expertise and leadership to solve impactful problems.",
+  "contact": {
+    "email": "nahuel@nahuelsantos.com",
+    "linkedin": "https://linkedin.com/in/nahuelsantos",
+    "github": "https://github.com/nahuelsantos"
+  },
+  "experience": [
+    {
+      "company": "AilyLabs",
+      "company_url": "https://ailylabs.com",
+      "role": "Senior Software Engineer",
+      "period": "Oct 2023 – Present",
+      "location": "Barcelona, Spain",
+      "responsibilities": [
+        "Leading backend development for a multi-tenant AI analytics platform using .NET Core, designing and implementing scalable microservices and core features consumed via a Backend-for-Frontend (BFF) architecture.",
+        "Architecting solutions and providing technical guidance across multiple teams and senior engineers, ensuring consistency and quality.",
+        "Proactively identifying and addressing performance bottlenecks and architectural limitations in existing services, managing the modernization of legacy components.",
+        "Driving improvements in system observability using Datadog and Sentry within AWS.",
+        "Contributing to frontend development (React/React Native) and managing multi-tenancy aspects via Piranha CMS."
+      ]
+    },
+    {
+      "company": "Milestone Systems",
+      "company_url": "https://milestonesys.com",
+      "role": "Senior Software Engineer",
+      "period": "Oct 2022 – Oct 2023",
+      "location": "Barcelona, Spain",
+      "responsibilities": [
+        "Designed and developed microservices (Go, .NET, gRPC, REST) enabling integration between the core VMS product and 3rd party analytics tools, empowering external developers.",
+        "Operated extensively within a Kubernetes environment, defining deployment strategies and optimizing distributed services for high throughput and reliability.",
+        "Mentored two junior developers, guiding their technical growth and contributions.",
+        "Contributed to team building as part of the events committee."
+      ]
+    },
+    {
+      "company": "Xero",
+      "company_url": "https://xero.com",
+      "role": "Senior Software Engineer",
+      "period": "Apr 2021 – Apr 2022",
+      "location": "Auckland, New Zealand",
+      "responsibilities": [
+        "Architected and delivered a mission-critical, microservices-based integration layer (using .NET Core, Go, Lambda, DynamoDB, S3) between Xero's accounting platform and Shopify, automating key financial workflows for numerous customers.",
+        "Collaborated closely with multiple Xero teams to ensure seamless end-to-end functionality.",
+        "Managed cloud infrastructure via Terraform, promoting Infrastructure as Code practices."
+      ]
+    },
+    {
+      "company": "Sandfield",
+      "company_url": "https://sandfield.co.nz",
+      "role": "Solutions Developer / Lead / Architect",
+      "period": "Mar 2015 – Apr 2022",
+      "location": "Auckland, New Zealand",
+      "responsibilities": [
+        "Led development of a comprehensive transport management platform (.NET Framework/Core, SQL Server, React) serving 100+ enterprise clients across New Zealand and Australia.",
+        "Architected and implemented a multi-tenant SaaS solution handling millions of transactions, ensuring 99.9% uptime and sub-second response times.",
+        "Designed and built RESTful APIs and integration layers connecting with 50+ third-party systems (payment gateways, mapping services, government APIs).",
+        "Led a team of 4 developers on a new transport product initiative, implementing automated CI/CD pipelines and database migration strategies.",
+        "Championed engineering best practices through knowledge transfer sessions on SOLID principles, Clean Architecture, and Microservices patterns.",
+        "Mentored interns as part of the company's official program."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "title": "Core Languages",
+      "skills": ["C# (.NET Core/Framework)", "Go", "JavaScript/TypeScript"]
+    },
+    {
+      "title": "Frontend",
+      "skills": ["React", "React Native", "HTML5/CSS3"]
+    },
+    {
+      "title": "Backend & Architecture",
+      "skills": ["Microservices", "gRPC", "REST APIs", "Event-Driven Systems", "Domain-Driven Design"]
+    },
+    {
+      "title": "Cloud & DevOps",
+      "skills": ["AWS", "Kubernetes", "Docker", "Terraform", "CI/CD", "Azure DevOps"]
+    },
+    {
+      "title": "Databases",
+      "skills": ["SQL Server", "DynamoDB", "Redis"]
+    },
+    {
+      "title": "Observability",
+      "skills": ["Datadog", "Sentry", "LGMT stack", "Logging"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Don't Let Me Die",
+      "description": "A kind of fancy CLI quiz game where you keep your pet alive by answering questions correctly. Features interactive CLI menus, NPM package distribution, and questions fetched from Open Trivia Database. Built to practice creating NPM packages and interactive command-line interfaces.",
+      "tags": ["JavaScript", "Node.js", "CLI", "NPM", "Inquirer", "Chalk", "Figlet"],
+      "link": "https://github.com/nahuelsantos/dont-let-me-die"
+    },
+    {
+      "name": "Dinky Server",
+      "description": "A comprehensive self-hosted server setup with monitoring, security, and service management - all through a single interactive script. Features LGTMA stack (Loki, Grafana, Tempo, Metrics, Argus) for complete observability, Traefik for reverse proxy, Pi-hole for DNS, and automated deployment scripts.",
+      "tags": ["Shell", "Docker", "Grafana", "Prometheus", "Loki", "Tempo", "Traefik"],
+      "link": "https://github.com/nahuelsantos/dinky-server"
+    },
+    {
+      "name": "Argus",
+      "description": "A LGTM stack validator and tester integrated with the monitoring infrastructure. Provides synthetic testing and validation for the entire observability stack, ensuring reliability and performance of monitoring systems.",
+      "tags": ["Go", "LGTM Stack", "Monitoring", "Testing", "Observability"],
+      "link": "https://github.com/nahuelsantos/argus"
+    },
+    {
+      "name": "Personal Resume Website",
+      "description": "A modern, responsive resume website built with pure HTML, CSS, and JavaScript. Features dark/light mode, contact form integration, PDF download, and Docker deployment. Showcases professional experience and projects with a clean, mobile-friendly design.",
+      "tags": ["HTML5", "CSS3", "JavaScript"],
+      "link": "https://github.com/nahuelsantos/cv"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master's Degree, Software Engineering",
+      "period": "2012 – 2014",
+      "institution": "Universidad Nacional de La Plata (UNLP)",
+      "institution_url": "https://unlp.edu.ar",
+      "location": "Argentina",
+      "details": "Focused on advanced software design patterns, architectural principles, software quality assurance, and project management methodologies, deepening the theoretical and practical aspects of building complex software systems."
+    },
+    {
+      "degree": "Engineering Degree, Systems Information Engineering",
+      "period": "2005 – 2011",
+      "institution": "Universidad Tecnológica Nacional (UTN)",
+      "institution_url": "https://utn.edu.ar",
+      "location": "Argentina",
+      "details": "Comprehensive 5-year engineering program covering foundational computer science, algorithms, data structures, database management, networking, operating systems, and the full software development lifecycle. Provided a strong analytical and problem-solving base."
+    },
+    {
+      "degree": "Deep Learning Specialization",
+      "period": "2017 – 2018",
+      "institution": "Coursera (deeplearning.ai)",
+      "institution_url": "https://coursera.org/specializations/deep-learning",
+      "location": "",
+      "details": "In-depth specialization covering foundational and advanced neural networks, Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs), model tuning strategies, and practical applications of deep learning."
+    },
+    {
+      "degree": "Self-Driving Car Engineer Nanodegree",
+      "period": "2016 – 2017",
+      "institution": "Udacity",
+      "institution_url": "https://udacity.com/course/self-driving-car-engineer-nanodegree--nd013",
+      "location": "",
+      "details": "Hands-on program focused on the core components of autonomous vehicle technology, including computer vision, sensor fusion, localization, path planning, and control systems, utilizing relevant ML/DL techniques."
+    }
+  ]
+} 

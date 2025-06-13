@@ -76,53 +76,65 @@ make stop    # Stop the containers
 make clean   # Clean up containers and images
 ```
 
-## 📄 Updating CV PDF (Without Rebuilding)
+## 📄 Hot Reloading CV Data (Without Rebuilding)
 
-The application supports hot PDF updates using Docker volumes. This allows you to update your CV without rebuilding the entire Docker image.
+The application supports hot updates for both PDF and CV content using Docker volumes. This allows you to update your CV and resume data without rebuilding the entire Docker image.
 
 ### How It Works
 
-1. **Built-in PDF**: The Docker image contains a fallback PDF at `/usr/share/nginx/html/assets/nahuel-santos-cv.pdf`
-2. **External Volume**: The `cv-data/` directory is mounted as a volume
-3. **Nginx Logic**: Serves external PDF if present, otherwise falls back to built-in PDF
+1. **Built-in Files**: The Docker image contains fallback files:
+   - PDF: `/usr/share/nginx/html/assets/cv.pdf`
+   - JSON: `/usr/share/nginx/html/cv.json`
+2. **External Volume**: The `data/` directory is mounted as a volume
+3. **Nginx Logic**: Serves external files if present, otherwise falls back to built-in files
 
 ### Setup
 
 1. **Create the directory** (if it doesn't exist):
    ```bash
-   mkdir -p cv-data
+   mkdir -p data
    ```
 
-2. **Update your PDF**:
+2. **Update your files**:
    ```bash
-   # Copy your new CV to the volume directory
-   cp /path/to/your/new-cv.pdf cv-data/nahuel-santos-cv.pdf
+   # Copy your new CV PDF to the volume directory
+   cp /path/to/your/new-cv.pdf data/cv.pdf
+   
+   # Copy your updated CV data JSON to the volume directory
+   cp /path/to/your/updated-cv.json data/cv.json
    ```
 
-3. **Verify the update**:
+3. **Verify the updates**:
    ```bash
    # Check if the new PDF is being served
-   curl -I http://localhost:8003/assets/nahuel-santos-cv.pdf
+   curl -I http://localhost:3001/assets/cv.pdf
+   
+   # Check if the new JSON is being served
+   curl http://localhost:3001/cv.json
    ```
 
-### PDF Update Process
+### Update Process
 
 ```bash
-# Example: Update CV with a new version
-cp ~/Downloads/nahuel-santos-cv-2024.pdf cv-data/nahuel-santos-cv.pdf
+# Example: Update both CV content and PDF
+cp ~/Downloads/nahuel-santos-cv-2024.pdf data/cv.pdf
+cp ~/Downloads/updated-cv.json data/cv.json
 
-# The new PDF is immediately available at:
-# https://nahuelsantos.com/assets/nahuel-santos-cv.pdf
+# Both files are immediately available:
+# https://nahuelsantos.com/assets/cv.pdf (downloads as firstname-lastname-cv.pdf)
+# https://nahuelsantos.com/cv.json (auto-reloads page content)
 ```
 
-### Reverting to Built-in PDF
+### Reverting to Built-in Files
 
 ```bash
-# Remove external PDF to use the built-in version
-rm cv-data/nahuel-santos-cv.pdf
+# Remove external files to use the built-in versions
+rm data/cv.pdf
+rm data/cv.json
 
-# Or rename it to keep a backup
-mv cv-data/nahuel-santos-cv.pdf cv-data/nahuel-santos-cv.pdf.backup
+# Or rename them to keep backups
+mv data/cv.pdf data/cv.pdf.backup
+mv data/cv.json data/cv.json.backup
 ```
 
 ### Volume Configuration
@@ -130,15 +142,37 @@ mv cv-data/nahuel-santos-cv.pdf cv-data/nahuel-santos-cv.pdf.backup
 The `docker-compose.yml` includes:
 ```yaml
 volumes:
-  # Mount external CV PDF (optional - falls back to container's PDF if not present)
-  - ./cv-data:/usr/share/nginx/html/assets/external:ro
+  # Mount external CV data (optional - falls back to container's files if not present)
+  - ./data:/usr/share/nginx/html/assets/external:ro
 ```
+
+**Supported Files:**
+- `data/cv.pdf` → `/assets/cv.pdf` (downloads as `firstname-lastname-cv.pdf`)
+- `data/cv.json` → `/cv.json`
 
 **Key Points:**
 - ✅ **No container restart** needed
-- ✅ **Immediate updates** - PDF is live instantly
-- ✅ **Safe fallback** - built-in PDF if external is missing
+- ✅ **Immediate updates** - both PDF and CV content are live instantly
+- ✅ **Safe fallback** - built-in files if external are missing
 - ✅ **Read-only mount** - container can't modify your files
+- ✅ **Cache control** - JSON has no-cache headers for instant updates
+- ✅ **Dynamic PDF naming** - Downloads use `firstname-lastname-cv.pdf` format from JSON data
+
+### Dynamic PDF Download
+
+The PDF download feature automatically generates the filename based on the `name` field in your `cv.json`:
+
+```json
+{
+  "name": "John Smith",
+  // ... other data
+}
+```
+
+**Download behavior:**
+- File served from: `/assets/cv.pdf`
+- Downloaded as: `john-smith-cv.pdf`
+- Fallback: Opens PDF in browser if download fails
 
 ## 🏗 Architecture Decisions
 
