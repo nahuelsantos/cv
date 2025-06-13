@@ -136,9 +136,8 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## 📞 Contact
 
-- **Email**: nahuel@nahuelsantos.com
+- **Web**: nahuelsantos.com
 - **LinkedIn**: [linkedin.com/in/nahuelsantos](https://linkedin.com/in/nahuelsantos)
-- **GitHub**: [github.com/nahuelsantos](https://github.com/nahuelsantos)
 
 ---
 
