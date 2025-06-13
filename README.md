@@ -2,6 +2,8 @@
 
 A modern, responsive CV website built with pure HTML, CSS, and JavaScript. Features dark/light mode, contact form, PDF download, and JSON-driven content.
 
+**🌐 [See it in action](https://cv.nahuelsantos.com)** - Live demo with sample data
+
 ## Features
 
 - **Responsive Design** - Works on all devices
