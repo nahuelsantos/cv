@@ -102,6 +102,36 @@ docker-compose up -d
 
 For production with Traefik, uncomment the labels in `docker-compose.yml`.
 
+### Complete Setup with Contact API
+For a full setup including the contact API, create this `docker-compose.yml`:
+
+```yaml
+services:
+  cv:
+    build: .
+    container_name: cv-website
+    restart: unless-stopped
+    ports:
+      - "3001:80"
+    volumes:
+      - ./config.json:/usr/share/nginx/html/config.json:ro
+      - ./data:/usr/share/nginx/html/assets/external:ro
+    depends_on:
+      - contact-api
+
+  contact-api:
+    image: ghcr.io/nahuelsantos/contact-api:latest
+    container_name: contact-api
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    environment:
+      - SMTP_HOST=your-smtp-server
+      - SMTP_PORT=587
+      - DEFAULT_TO=your-email@domain.com
+      - DEFAULT_FROM=noreply@yourdomain.com
+```
+
 ## Customization
 
 ### Styling
@@ -115,7 +145,35 @@ Edit CSS variables in `style.css`:
 ```
 
 ### Contact Form
-Update the API endpoint in `script.js` if you have a contact service.
+
+This website integrates with [contact-api](https://github.com/nahuelsantos/contact-api) for handling contact form submissions. 
+
+**Quick Setup with Contact API:**
+```bash
+# 1. Run the contact API
+docker run -d \
+  -p 3002:3002 \
+  -e SMTP_HOST=your-smtp-server \
+  -e DEFAULT_TO=your-email@domain.com \
+  ghcr.io/nahuelsantos/contact-api:latest
+
+# 2. Configure your CV website
+# Edit config.json to point to your contact API:
+```
+
+**Configuration:**
+The contact form is configured via `config.json`. Update the `contactApiUrl` to point to your contact API service:
+
+```json
+{
+    "contactApiUrl": "http://contact-api:3002/api/v1/contact/main"
+}
+```
+
+For Docker users, the config file is automatically mounted, so you can modify it without rebuilding the container.
+
+**Without Contact API:**
+If you don't want to use contact-api, you can set up your own contact endpoint or disable the form by setting `contactApiUrl` to `null`.
 
 ## Template System
 

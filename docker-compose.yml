@@ -5,10 +5,11 @@ services:
     restart: unless-stopped
     ports:
       - "3001:80"
-      
-    # Uncomment the following for production with Traefik  
-    #volumes:
-    #  - ./data:/usr/share/nginx/html/assets/external:ro
+    volumes:
+      # Mount configuration file for easy customization
+      - ./config.json:/usr/share/nginx/html/config.json:ro
+      # Mount data directory for CV content
+      - ./data:/usr/share/nginx/html/assets/external:ro
     
     # networks:
     #   - traefik
