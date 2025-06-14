@@ -169,7 +169,7 @@ class ContactForm {
         this.setLoading(true);
 
         try {
-            const response = await fetch('http://contact-api:3010/contact', {
+            const response = await fetch('http://contact-api:3002/api/v1/contact/main', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -177,11 +177,13 @@ class ContactForm {
                 body: JSON.stringify(data)
             });
 
+            const result = await response.json();
+
             if (response.ok) {
-                this.showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+                this.showNotification(result.message || 'Message sent successfully! I\'ll get back to you soon.', 'success');
                 this.close();
             } else {
-                throw new Error('Failed to send message');
+                throw new Error(result.message || 'Failed to send message');
             }
         } catch (error) {
             console.error('Contact form error:', error);
