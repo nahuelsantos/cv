@@ -1,6 +1,6 @@
 // Configuration - loaded dynamically from config.json
 let CONFIG = {
-    CONTACT_API_URL: 'http://contact-api:3002/api/v1/contact/cv' // fallback default
+    CONTACT_API_URL: '/api/v1/contact/cv' // fallback default
 };
 
 // Load configuration from external file
