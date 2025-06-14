@@ -399,6 +399,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     populateCVFromJSON();
+
+    // Add event listeners for buttons that were using inline onclick
+    const headerContactBtn = document.getElementById('header-contact-btn');
+    if (headerContactBtn) {
+        headerContactBtn.addEventListener('click', () => window.contactForm?.open());
+    }
+    
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', () => window.contactForm?.close());
+    }
+    
+    const cancelBtn = document.getElementById('cancel-btn');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', () => window.contactForm?.close());
+    }
 });
 
 // Global functions for HTML onclick handlers
@@ -410,7 +426,7 @@ function closeContactForm() {
     window.contactForm?.close();
 }
 
-// JSON-driven CV population  
+// JSON-driven CV population
 function populateCVFromJSON() {
   fetch('assets/external/cv.json')
     .then(res => {
@@ -426,22 +442,43 @@ function populateCVFromJSON() {
       document.querySelector('.location').innerHTML = '<img src="assets/location-pin.svg" alt="location" class="icon"> ' + data.location;
       document.querySelector('.summary').textContent = data.summary;
 
-      // Actions (contact, LinkedIn, GitHub, Download CV)
-      const actions = document.querySelector('.actions');
-      actions.innerHTML = `
-        <button class="btn btn-outline" onclick="openContactForm()">
-          <img src="assets/envelope.svg" alt="envelope" class="icon"> Contact Me
-        </button>
-        <a href="${data.contact.linkedin}" target="_blank" class="btn btn-outline">
-          <img src="assets/linkedin.svg" alt="linkedin" class="icon"> LinkedIn
-        </a>
-        <a href="${data.contact.github}" target="_blank" class="btn btn-outline">
-          <img src="assets/github.svg" alt="github" class="icon"> GitHub
-        </a>
-        <a href="assets/nahuel-santos-cv.pdf" download class="btn btn-outline">
-          <img src="assets/download-alt.svg" alt="download" class="icon"> Download CV
-        </a>
-      `;
+      // Actions (contact, LinkedIn, GitHub, Download CV) - More robustly update elements
+      const actionsContainer = document.querySelector('.actions');
+      if (actionsContainer) {
+          const linkedinLink = actionsContainer.querySelector('a[href*="linkedin.com"]');
+          if (linkedinLink) linkedinLink.href = data.contact.linkedin;
+
+          const githubLink = actionsContainer.querySelector('a[href*="github.com"]');
+          if (githubLink) githubLink.href = data.contact.github;
+
+          const downloadLink = document.getElementById('download-cv');
+          if (downloadLink) {
+              const nameParts = data.name.toLowerCase().split(' ');
+              const filename = `${nameParts[0]}-${nameParts[nameParts.length - 1]}-cv.pdf`;
+
+              downloadLink.addEventListener('click', async (e) => {
+                  e.preventDefault();
+                  try {
+                      const response = await fetch('assets/external/cv.pdf');
+                      if (!response.ok) throw new Error('PDF not found');
+                      const blob = await response.blob();
+                      const url = window.URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.style.display = 'none';
+                      a.href = url;
+                      a.download = filename;
+                      document.body.appendChild(a);
+                      a.click();
+                      window.URL.revokeObjectURL(url);
+                      document.body.removeChild(a);
+                  } catch (error) {
+                      console.error('Error downloading PDF:', error);
+                      // Fallback to direct link if blob download fails
+                      window.open('assets/external/cv.pdf', '_blank');
+                  }
+              });
+          }
+      }
 
       // Experience
       const expContainer = document.querySelector('#experience .container');
