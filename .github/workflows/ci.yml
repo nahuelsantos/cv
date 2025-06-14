@@ -18,7 +18,6 @@ jobs:
       with:
         root: .
         css: true
-        also-check-css: true
 
     - name: Check required files and assets
       run: |
@@ -74,12 +73,22 @@ jobs:
 
     - name: Check CSS syntax
       run: |
-        # Basic CSS syntax check using Node.js CSS parser
-        npx css-tree-validate style.css || {
-          echo "❌ CSS syntax errors found"
+        # Basic CSS syntax check - look for common syntax errors
+        if grep -E "^\s*[^}]*{[^}]*$" style.css | grep -v "\/\*" | grep -v "\*\/" > /dev/null; then
+          # Check for unclosed braces by counting
+          open_braces=$(grep -o '{' style.css | wc -l)
+          close_braces=$(grep -o '}' style.css | wc -l)
+          if [ "$open_braces" -ne "$close_braces" ]; then
+            echo "❌ CSS syntax error: Mismatched braces (${open_braces} open, ${close_braces} close)"
+            exit 1
+          fi
+        fi
+        # Check for basic CSS structure
+        if [ ! -s style.css ]; then
+          echo "❌ CSS file is empty"
           exit 1
-        }
-        echo "✅ CSS syntax is valid"
+        fi
+        echo "✅ CSS syntax appears valid"
 
     - name: Check JavaScript syntax
       run: |

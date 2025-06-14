@@ -1,3 +1,21 @@
+// Configuration - loaded dynamically from config.json
+let CONFIG = {
+    CONTACT_API_URL: 'http://contact-api:3002/api/v1/contact/cv' // fallback default
+};
+
+// Load configuration from external file
+async function loadConfig() {
+    try {
+        const response = await fetch('config.json');
+        if (response.ok) {
+            const config = await response.json();
+            CONFIG.CONTACT_API_URL = config.contactApiUrl || CONFIG.CONTACT_API_URL;
+        }
+    } catch (error) {
+        console.warn('Could not load config.json, using default configuration:', error);
+    }
+}
+
 // Theme Management
 class ThemeManager {
     constructor() {
@@ -169,7 +187,7 @@ class ContactForm {
         this.setLoading(true);
 
         try {
-            const response = await fetch('http://contact-api:3010/contact', {
+            const response = await fetch(CONFIG.CONTACT_API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -177,11 +195,13 @@ class ContactForm {
                 body: JSON.stringify(data)
             });
 
+            const result = await response.json();
+
             if (response.ok) {
-                this.showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+                this.showNotification(result.message || 'Message sent successfully! I\'ll get back to you soon.', 'success');
                 this.close();
             } else {
-                throw new Error('Failed to send message');
+                throw new Error(result.message || 'Failed to send message');
             }
         } catch (error) {
             console.error('Contact form error:', error);
@@ -300,7 +320,10 @@ class SmoothScroll {
 }
 
 // Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load configuration first
+    await loadConfig();
+    
     // Initialize components
     window.themeManager = new ThemeManager();
     window.contactForm = new ContactForm();
