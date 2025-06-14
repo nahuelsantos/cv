@@ -9,7 +9,14 @@ async function loadConfig() {
         const response = await fetch('config.json');
         if (response.ok) {
             const config = await response.json();
-            CONFIG.CONTACT_API_URL = config.contactApiUrl || CONFIG.CONTACT_API_URL;
+            let apiUrl = config.contactApiUrl || CONFIG.CONTACT_API_URL;
+            
+            // Handle protocol matching - use same protocol as current page
+            if (apiUrl && window.location.protocol === 'https:' && apiUrl.startsWith('http:')) {
+                apiUrl = apiUrl.replace('http:', 'https:');
+            }
+            
+            CONFIG.CONTACT_API_URL = apiUrl;
         }
     } catch (error) {
         console.warn('Could not load config.json, using default configuration:', error);
@@ -195,17 +202,35 @@ class ContactForm {
                 body: JSON.stringify(data)
             });
 
-            const result = await response.json();
+            let result;
+            const contentType = response.headers.get('content-type');
+            
+            if (contentType && contentType.includes('application/json')) {
+                result = await response.json();
+            } else {
+                // Handle non-JSON responses (like HTML error pages)
+                const text = await response.text();
+                result = { message: `Server returned: ${response.status} ${response.statusText}` };
+                console.error('Non-JSON response:', text);
+            }
 
             if (response.ok) {
                 this.showNotification(result.message || 'Message sent successfully! I\'ll get back to you soon.', 'success');
                 this.close();
             } else {
-                throw new Error(result.message || 'Failed to send message');
+                throw new Error(result.message || `Failed to send message (${response.status})`);
             }
         } catch (error) {
             console.error('Contact form error:', error);
-            this.showNotification('Failed to send message. Please try again later.', 'error');
+            let errorMessage = 'Failed to send message. Please try again later.';
+            
+            if (error.message.includes('Failed to fetch')) {
+                errorMessage = 'Could not connect to contact service. Please check your internet connection.';
+            } else if (error.message.includes('Mixed Content')) {
+                errorMessage = 'Security error: Cannot send message from secure page to insecure API.';
+            }
+            
+            this.showNotification(errorMessage, 'error');
         } finally {
             this.setLoading(false);
         }
@@ -235,7 +260,7 @@ class ContactForm {
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 3000;
+            z-index: 10000;
             background: ${colors[type]};
             color: white;
             padding: 1rem 1.5rem;
@@ -245,7 +270,10 @@ class ContactForm {
             align-items: center;
             gap: 1rem;
             max-width: 400px;
+            min-width: 300px;
             animation: slideIn 0.3s ease;
+            font-size: 14px;
+            line-height: 1.4;
         `;
 
         // Add animation styles if not already present
@@ -274,6 +302,15 @@ class ContactForm {
                 }
                 .notification button:hover {
                     background: rgba(255,255,255,0.2);
+                }
+                @media (max-width: 480px) {
+                    .notification {
+                        top: 10px !important;
+                        right: 10px !important;
+                        left: 10px !important;
+                        max-width: none !important;
+                        min-width: none !important;
+                    }
                 }
             `;
             document.head.appendChild(styles);
@@ -373,10 +410,15 @@ function closeContactForm() {
     window.contactForm?.close();
 }
 
-// JSON-driven CV population
+// JSON-driven CV population  
 function populateCVFromJSON() {
-  fetch('cv-data.json')
-    .then(res => res.json())
+  fetch('assets/external/cv.json')
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`Failed to load CV data: ${res.status}`);
+      }
+      return res.json();
+    })
     .then(data => {
       // Header
       document.querySelector('.name').textContent = data.name;
@@ -471,5 +513,11 @@ function populateCVFromJSON() {
         `;
         eduGrid.appendChild(card);
       });
+    })
+    .catch(error => {
+      console.error('Error loading CV data:', error);
+      // Show a subtle error message if CV data fails to load
+      document.querySelector('.name').textContent = 'CV Data Loading Error';
+      document.querySelector('.summary').textContent = 'Failed to load CV data. Please check the configuration.';
     });
 } 
