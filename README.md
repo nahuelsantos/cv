@@ -2,15 +2,17 @@
 
 A modern, responsive CV website built with pure HTML, CSS, and JavaScript. Features dark/light mode, contact form, PDF download, and JSON-driven content.
 
-## ✨ Features
+**🌐 [See it in action](https://cv.nahuelsantos.com)** - Live demo with sample data
 
-- 📱 **Responsive Design** - Works on all devices
-- 🌙 **Dark/Light Mode** - Automatic theme switching
-- 📄 **PDF Download** - Dynamic filename based on your name
-- 🔄 **Hot Reload** - Update content without rebuilding
-- 📝 **JSON-Driven** - Easy content management
-- 🐳 **Docker Ready** - Simple deployment
-- 🔒 **Privacy First** - Your data stays private
+## Features
+
+- **Responsive Design** - Works on all devices
+- **Dark/Light Mode** - Automatic theme switching
+- **PDF Download** - Dynamic filename based on your name
+- **Hot Reload** - Update content without rebuilding
+- **JSON-Driven** - Easy content management
+- **Docker Ready** - Simple deployment
+- **Privacy First** - Your data stays private
 
 ## 🚀 Quick Start
 
@@ -47,15 +49,15 @@ make run
 
 ```
 data/
-├── cv.template.json     # 📄 Sample CV data (copy this)
-├── cv.template.pdf      # 📄 Sample resume PDF (copy this)
-├── cv.json             # 🔒 Your real CV data (gitignored)
-└── cv.pdf              # 🔒 Your real resume PDF (gitignored)
+├── cv.template.json     # Sample CV data (copy this)
+├── cv.template.pdf      # Sample resume PDF (copy this)
+├── cv.json             # Your real CV data (gitignored)
+└── cv.pdf              # Your real resume PDF (gitignored)
 ```
 
 **Everything you need to edit is in the `data/` folder!**
 
-## ✏️ Editing Your CV
+## Editing Your CV
 
 ### Update Content
 
@@ -84,7 +86,7 @@ scp data/cv.pdf user@server:/path/to/cv/data/
 # Changes are live immediately!
 ```
 
-## 🐳 Deployment
+## Deployment
 
 ### Local Development
 ```bash
@@ -100,7 +102,7 @@ docker-compose up -d
 
 For production with Traefik, uncomment the labels in `docker-compose.yml`.
 
-## 🎨 Customization
+## Customization
 
 ### Styling
 Edit CSS variables in `style.css`:
@@ -115,7 +117,7 @@ Edit CSS variables in `style.css`:
 ### Contact Form
 Update the API endpoint in `script.js` if you have a contact service.
 
-## 📋 Template System
+## Template System
 
 This project protects your privacy by using templates:
 
@@ -123,22 +125,21 @@ This project protects your privacy by using templates:
 - **Your data** (`cv.json`, `cv.pdf`) - Automatically ignored by git
 - **Setup** - Simple copy commands to get started
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Make your changes
 3. Test with `make test`
 4. Submit a pull request
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](LICENSE) for details.
 
-## 📞 Contact
+## Contact
 
-- **Email**: nahuel@nahuelsantos.com
+- **Web**: [https://nahuelsantos.com](https://nahuelsantos.com)
 - **LinkedIn**: [linkedin.com/in/nahuelsantos](https://linkedin.com/in/nahuelsantos)
-- **GitHub**: [github.com/nahuelsantos](https://github.com/nahuelsantos)
 
 ---
 
