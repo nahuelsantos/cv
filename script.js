@@ -428,7 +428,7 @@ function closeContactForm() {
 
 // JSON-driven CV population
 function populateCVFromJSON() {
-  fetch('assets/external/cv.json')
+  fetch('cv.json')
     .then(res => {
       if (!res.ok) {
         throw new Error(`Failed to load CV data: ${res.status}`);
@@ -459,7 +459,7 @@ function populateCVFromJSON() {
               downloadLink.addEventListener('click', async (e) => {
                   e.preventDefault();
                   try {
-                      const response = await fetch('assets/external/cv.pdf');
+                      const response = await fetch('assets/cv.pdf');
                       if (!response.ok) throw new Error('PDF not found');
                       const blob = await response.blob();
                       const url = window.URL.createObjectURL(blob);
@@ -474,7 +474,7 @@ function populateCVFromJSON() {
                   } catch (error) {
                       console.error('Error downloading PDF:', error);
                       // Fallback to direct link if blob download fails
-                      window.open('assets/external/cv.pdf', '_blank');
+                      window.open('assets/cv.pdf', '_blank');
                   }
               });
           }
