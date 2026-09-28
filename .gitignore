@@ -18,9 +18,11 @@ node_modules/
 .env.test.local
 .env.production.local
 
-# Real CV data (keep private)
-data/cv.json
+# Uploaded CV data (optional external override; data/cv.json is the source)
 data/cv.pdf
+
+# Generated PDF (built into the image, see scripts/generate_cv_pdf.py)
+assets/cv.pdf
 
 # OS generated files
 .DS_Store?

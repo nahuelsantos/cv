@@ -4,14 +4,14 @@
 Usage:
     python3 scripts/generate_cv_pdf.py [data/cv.json] [-o assets/cv.pdf] [--no-verify]
 
-ATS rules this deliberately follows (see also the PR description):
+ATS rules this deliberately follows:
   * one column, no tables, no text boxes, no images or icons
   * real text in the standard Helvetica family, so every character is
     extractable by parsers (no outlines, no vectors, no font subsets)
   * conventional section headings ("Experience", "Education", "Skills")
   * contact details as literal text, including the URLs, not only as links
   * no page headers/footers that parsers may merge into the content
-  * consistent "Role - Company" then "Location | Period" ordering per role
+  * consistent "Role - Company" then "Location | Period | domain" ordering
 
 With --verify (the default) the produced file is re-read and every string from
 the data must be findable in the extracted text. A layout bug that silently
@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -53,6 +54,10 @@ BULLET = ParagraphStyle("bullet", parent=BODY, leftIndent=11, bulletIndent=1,
                         spaceAfter=2.2, alignment=TA_LEFT)
 PROJECT_META = ParagraphStyle("project_meta", parent=BODY, fontSize=9.5,
                               leading=12, textColor=MUTED, spaceAfter=0)
+
+# Fields that exist for the page's markup and are intentionally not printed.
+NOT_PRINTED = ("group", "period_short", "link_label", "link_icon")
+URL_FIELDS = ("company_url", "institution_url", "link", "linkedin", "github", "website")
 
 
 def esc(value) -> str:
@@ -88,12 +93,9 @@ def build_story(data: dict) -> list:
         bits.append(esc(data["location"]))
     if contact.get("email"):
         bits.append(link(f"mailto:{contact['email']}", contact["email"]))
-    if contact.get("linkedin"):
-        bits.append(link(contact["linkedin"], bare_domain(contact["linkedin"])))
-    if contact.get("github"):
-        bits.append(link(contact["github"], bare_domain(contact["github"])))
-    if contact.get("website"):
-        bits.append(link(contact["website"], bare_domain(contact["website"])))
+    for key in ("linkedin", "github", "website"):
+        if contact.get(key):
+            bits.append(link(contact[key], bare_domain(contact[key])))
     if bits:
         story.append(Paragraph(" &nbsp;|&nbsp; ".join(bits), META))
     story.append(HRFlowable(width="100%", thickness=0.6, color=HexColor("#999999"),
@@ -117,7 +119,7 @@ def build_story(data: dict) -> list:
                 meta.append(esc(bare_domain(job["company_url"])))
             if meta:
                 block.append(Paragraph(" | ".join(meta), META))
-            for item in job.get("highlights", []):
+            for item in job.get("responsibilities", []):
                 block.append(Paragraph(esc(item), BULLET, bulletText="\u2022"))
             story.append(KeepTogether(block[:2]))
             story.extend(block[2:])
@@ -126,7 +128,7 @@ def build_story(data: dict) -> list:
     if data.get("skills"):
         story.append(Paragraph("TECHNICAL SKILLS", SECTION))
         for group in data["skills"]:
-            line = f"<b>{esc(group.get('category'))}:</b> {esc(', '.join(group.get('items', [])))}"
+            line = f"<b>{esc(group.get('title'))}:</b> {esc(', '.join(group.get('skills', [])))}"
             story.append(Paragraph(line, SKILLS))
 
     if data.get("projects"):
@@ -136,27 +138,28 @@ def build_story(data: dict) -> list:
             if project.get("description"):
                 block.append(Paragraph(esc(project["description"]), BODY))
             meta = []
-            if project.get("technologies"):
-                meta.append(esc(", ".join(project["technologies"])))
-            if project.get("url"):
-                meta.append(link(project["url"], bare_domain(project["url"])))
+            if project.get("tags"):
+                meta.append(esc(", ".join(project["tags"])))
+            if project.get("link"):
+                meta.append(link(project["link"], bare_domain(project["link"])))
             if meta:
                 block.append(Paragraph(" &nbsp;|&nbsp; ".join(meta), PROJECT_META))
             story.append(KeepTogether(block))
             story.append(Spacer(1, 4))
 
-    education = [g for g in data.get("education", []) if "certif" not in g.get("group", "").lower()]
-    certs = [g for g in data.get("education", []) if "certif" in g.get("group", "").lower()]
+    education = [e for e in data.get("education", []) if "certif" not in (e.get("group") or "").lower()]
+    certs = [e for e in data.get("education", []) if "certif" in (e.get("group") or "").lower()]
 
-    def entries(title: str, groups: list):
-        items = [i for g in groups for i in g.get("items", [])]
+    def entries(title: str, items: list):
         if not items:
             return
         story.append(Paragraph(title, SECTION))
         for entry in items:
-            head = esc(entry.get("title"))
+            head = esc(entry.get("degree"))
             if entry.get("institution"):
                 head += f" &mdash; {esc(entry['institution'])}"
+                if entry.get("location"):
+                    head += f", {esc(entry['location'])}"
             block = [Paragraph(head, ROLE_TITLE)]
             meta = []
             if entry.get("period"):
@@ -165,8 +168,8 @@ def build_story(data: dict) -> list:
                 meta.append(esc(bare_domain(entry["institution_url"])))
             if meta:
                 block.append(Paragraph(" | ".join(meta), META))
-            if entry.get("description"):
-                block.append(Paragraph(esc(entry["description"]), BODY))
+            if entry.get("details"):
+                block.append(Paragraph(esc(entry["details"]), BODY))
             story.append(KeepTogether(block))
             story.append(Spacer(1, 3))
 
@@ -183,7 +186,7 @@ def build(data: dict, out: Path) -> None:
         title=f"{data.get('name', 'CV')} - CV",
         author=data.get("name", ""),
         subject="Curriculum Vitae",
-        keywords=", ".join(item for group in data.get("skills", []) for item in group.get("items", [])),
+        keywords=", ".join(item for group in data.get("skills", []) for item in group.get("skills", [])),
         compression=1,
     )
     doc.build(build_story(data))
@@ -192,16 +195,14 @@ def build(data: dict, out: Path) -> None:
 def verify(data: dict, path: Path) -> list:
     try:
         from pypdf import PdfReader
-    except ImportError:  # pragma: no cover - only when --verify without pypdf
+    except ImportError:
         return ["pypdf is not installed: cannot verify the generated PDF"]
 
-    import re
     reader = PdfReader(str(path))
-    text = " ".join((page.extract_text() or "") for page in reader.pages)
-    flat = re.sub(r"\s+", " ", text).strip()
+    flat = re.sub(r"\s+", " ", " ".join((page.extract_text() or "") for page in reader.pages)).strip()
 
     problems = []
-    if len(reader.pages) == 0:
+    if not reader.pages:
         problems.append("the PDF has no pages")
     if re.search(r"john doe", flat, re.I):
         problems.append("the placeholder template content leaked into the PDF")
@@ -217,13 +218,12 @@ def verify(data: dict, path: Path) -> list:
             yield prefix, obj
 
     for key, value in walk(data):
-        if len(value) < 4 or key.endswith(".group"):
+        field = key.rsplit(".", 1)[-1]
+        if len(value) < 4 or field in NOT_PRINTED:
             continue
         # URLs are rendered in bare-domain form (readable text beats a scheme
-        # nobody reads); the group labels become the standard ATS headings.
-        url_like = (key.endswith("_url") or key.endswith(".url")
-                    or key in ("contact.linkedin", "contact.github", "contact.website"))
-        needle = bare_domain(value) if url_like else value
+        # nobody reads); section headings come from the generator, not the data.
+        needle = bare_domain(value) if field in URL_FIELDS else value
         if needle not in flat:
             problems.append(f"{key}: missing from the PDF text ({needle[:70]!r})")
     return problems
@@ -238,8 +238,7 @@ def main(argv=None) -> int:
 
     data_path, out_path = Path(args.data), Path(args.out)
     if not data_path.exists():
-        raise SystemExit(f"generate_cv_pdf: {data_path} not found "
-                         "(run scripts/extract_cv_json.py first)")
+        raise SystemExit(f"generate_cv_pdf: {data_path} not found")
 
     data = json.loads(data_path.read_text(encoding="utf-8"))
     if not data.get("name"):
@@ -257,7 +256,7 @@ def main(argv=None) -> int:
             return 2
 
     msg = (f"generate_cv_pdf: wrote {out_path} ({size} bytes): {len(data['experience'])} roles, "
-           f"{sum(len(j['highlights']) for j in data['experience'])} highlights, "
+           f"{sum(len(j['responsibilities']) for j in data['experience'])} highlights, "
            f"{len(data.get('projects', []))} projects")
     print(msg + (", ATS text layer verified" if not args.no_verify else ""))
     return 0

@@ -1,22 +1,25 @@
-# Stage 1: build the CV PDF from the page's own content.
+# Stage 1: build the page's content blocks and the CV PDF from data/cv.json.
 #
-# index.html is the source of truth (data/cv.template.* is the upstream "John
-# Doe" placeholder), so the downloadable PDF is generated here, at build time,
-# from the very content the site renders. It therefore cannot drift from the
-# page and cannot be the placeholder.
+# data/cv.json is the single source of truth: index.html and the downloadable
+# PDF are both generated from it here, so the image can never serve a page, or a
+# PDF, that disagrees with the data file. data/cv.template.* is the upstream
+# "John Doe" placeholder and is not used for this site.
 FROM python:3.13-slim AS cvpdf
 WORKDIR /build
 RUN pip install --no-cache-dir reportlab==5.0.1 pypdf==6.19.0
-COPY index.html humans.txt ./
+COPY index.html ./
+COPY data/cv.json ./
 COPY scripts/ scripts/
-RUN python3 scripts/extract_cv_json.py index.html -o data/cv.json \
+RUN python3 scripts/render_cv_html.py --data data/cv.json --html index.html \
  && python3 scripts/generate_cv_pdf.py data/cv.json -o cv.pdf
 
 # Stage 2: the site itself.
 FROM nginx:alpine
 
-# Copy website files
-COPY index.html style.css script.js manifest.json config.json /usr/share/nginx/html/
+# The page's content comes from the generated copy; the chrome (head, nav,
+# contact modal, footer) is the committed file's.
+COPY --from=cvpdf /build/index.html /usr/share/nginx/html/index.html
+COPY style.css script.js manifest.json config.json /usr/share/nginx/html/
 COPY data/cv.template.json /usr/share/nginx/html/cv.json
 COPY assets/ /usr/share/nginx/html/assets/
 
