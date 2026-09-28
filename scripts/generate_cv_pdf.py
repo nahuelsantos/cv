@@ -175,6 +175,12 @@ def build_story(data: dict) -> list:
 
     entries("EDUCATION", education)
     entries("CERTIFICATIONS", certs)
+
+    # A copyright line, not a page footer: parsers must not merge it into
+    # the content above, but it has to be present.
+    if data.get("copyright"):
+        story.append(Spacer(1, 10))
+        story.append(Paragraph(esc(data["copyright"]), META))
     return story
 
 

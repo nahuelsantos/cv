@@ -32,6 +32,9 @@ IND = "    "
 # a copy cached by a browser or by Cloudflare can never answer a fresh click --
 # headers alone do not help once a response is stored under that URL.
 DOWNLOAD_RE = re.compile(r'(<a href=")(assets/cv\.pdf)(\?v=[^"]*)?(" id="download-cv")')
+# The footer's copyright line also comes from the data file, so the year is
+# changed in one place (and next year's edit is one line).
+COPYRIGHT_RE = re.compile(r'(<footer class="footer">[\s\S]*?<p>)([\s\S]*?)(</p>)')
 
 
 def content_rev(data_path: pathlib.Path) -> str:
@@ -236,6 +239,12 @@ def render(page: str, data: dict, rev: str) -> str:
     if count != 1:
         raise SystemExit("render_cv_html: could not find the download link to stamp "
                          "(<a href=\"assets/cv.pdf\" id=\"download-cv\">)")
+
+    if data.get("copyright"):
+        stamped, count = COPYRIGHT_RE.subn(
+            lambda m: f"{m.group(1)}{esc(data['copyright'])}{m.group(3)}", stamped, count=1)
+        if count != 1:
+            raise SystemExit("render_cv_html: could not find the footer copyright line")
     return stamped
 
 
