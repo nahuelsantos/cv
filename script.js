@@ -432,7 +432,7 @@ function closeContactForm() {
 const CV_DATA_URL = 'cv.json';
 // Fallback only: the markup's href carries a content revision (?v=...), which
 // is what the handler fetches, so a release always downloads a fresh file.
-const CV_PDF_URL = 'assets/cv.pdf';
+const CV_PDF_URL = 'cv/download';
 
 // The download button is wired up regardless of the JSON flow: the PDF comes
 // from a fixed route, so it must work even when the data fetch fails.
