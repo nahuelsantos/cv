@@ -76,6 +76,22 @@
             
             <div class="card experience-card">
                 <div class="experience-header">
+                    <h3>Founder &amp; CTO @ <a href="https://staysy.co" target="_blank" class="company-link">Staysy</a></h3>
+                    <span class="period" data-full="Apr 2026 – Present" data-short="2026 – Present">Apr 2026 – Present</span>
+                </div>
+                <p class="location">Barcelona, Spain</p>
+                <ul class="responsibilities">
+                    <li>Founded Staysy, an app-free digital guidebook for short-term rental hosts: guests open a single link for pre-check-in info, WiFi, house rules, local tips and emergency contacts, with no app to install.</li>
+                    <li>Own the product end to end: a Go (standard-library net/http) + HTMX + PostgreSQL (JSONB) application, a Next.js static-export marketing site in English, Spanish and French, self-hosted with Docker Compose behind Traefik.</li>
+                    <li>Designed the host-facing model: an admin panel for 10-20+ properties, a structured content editor, and time-limited access codes per booking that auto-expire at checkout and can be revoked, with 404/410 semantics for unknown or expired links.</li>
+                    <li>Run the commercial side: free and Pro tiers with Stripe billing, pricing and onboarding funnels, and sales and support channels, including localized guest-link sharing (native share sheet, preview unfurls per language).</li>
+                    <li>Built the delivery pipeline: digest-pinned GHCR images, a UAT environment with Playwright end-to-end suites gated behind Cloudflare Access and Tailscale, and a manual promote-to-production release gate.</li>
+                    <li>Keep the platform hardened and documented: security audits, structured specs, and infrastructure scripts for repeatable self-hosted deploys.</li>
+                </ul>
+            </div>
+
+            <div class="card experience-card">
+                <div class="experience-header">
                     <h3>Senior Software Engineer @ <a href="https://ailylabs.com" target="_blank" class="company-link">AilyLabs</a></h3>
                     <span class="period" data-full="Oct 2023 – Present" data-short="2023 - Present">Oct 2023 – Present</span>
                 </div>
@@ -258,6 +274,24 @@
             <div class="projects-grid">
                 <div class="card">
                     <div class="card-header">
+                        <h3>Play This Today</h3>
+                    </div>
+                    <p>A viral web app built on The Game: open the link, lose The Game, then generate a shareable link to pass it on. Includes a rules page, dark/light themes and visitor geolocation, served by a self-hosted Go backend with rate limiting and a hardened security policy.</p>
+                    <div class="tag-container">
+                        <span class="tag">Go</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">Self-Hosted</span>
+                    </div>
+                    <a href="https://playthis.today" target="_blank" class="btn btn-outline">
+                        Visit playthis.today
+                    </a>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
                         <h3>Don't Let Me Die</h3>
                     </div>
                     <p>A kind of fancy CLI quiz game where you keep your pet alive by answering questions correctly. Features interactive CLI menus, NPM package distribution, and questions fetched from Open Trivia Database. Built to practice creating NPM packages and interactive command-line interfaces.</p>
@@ -280,7 +314,7 @@
                     <div class="card-header">
                         <h3>Dinky Server</h3>
                     </div>
-                    <p>A comprehensive self-hosted server setup with monitoring, security, and service management - all through a single interactive script. Features LGTMA stack (Loki, Grafana, Tempo, Metrics, Argus) for complete observability, Traefik for reverse proxy, Pi-hole for DNS, and automated deployment scripts.</p>
+                    <p>A comprehensive self-hosted server setup with monitoring, security, and service management - all through a single interactive script. Features LGTM stack (Loki, Grafana, Tempo, Metrics) for complete observability, Traefik for reverse proxy, Pi-hole for DNS, and automated deployment scripts.</p>
                     <div class="tag-container">
                         <span class="tag">Shell</span>
                         <span class="tag">Docker</span>
@@ -291,24 +325,6 @@
                         <span class="tag">Traefik</span>
                     </div>
                     <a href="https://github.com/nahuelsantos/dinky-server" target="_blank" class="btn btn-outline">
-                        <img src="assets/github.svg" alt="github" class="icon">
-                        View on GitHub
-                    </a>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Argus</h3>
-                    </div>
-                    <p>A LGTM stack validator and tester integrated with the monitoring infrastructure. Provides synthetic testing and validation for the entire observability stack, ensuring reliability and performance of monitoring systems.</p>
-                    <div class="tag-container">
-                        <span class="tag">Go</span>
-                        <span class="tag">LGTM Stack</span>
-                        <span class="tag">Monitoring</span>
-                        <span class="tag">Testing</span>
-                        <span class="tag">Observability</span>
-                    </div>
-                    <a href="https://github.com/nahuelsantos/argus" target="_blank" class="btn btn-outline">
                         <img src="assets/github.svg" alt="github" class="icon">
                         View on GitHub
                     </a>
