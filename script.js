@@ -430,6 +430,8 @@ function closeContactForm() {
 // CV data + PDF are served through the nginx fallback routes (see nginx.conf):
 // the externally mounted files win, the bundled templates are the fallback.
 const CV_DATA_URL = 'cv.json';
+// Fallback only: the markup's href carries a content revision (?v=...), which
+// is what the handler fetches, so a release always downloads a fresh file.
 const CV_PDF_URL = 'assets/cv.pdf';
 
 // The download button is wired up regardless of the JSON flow: the PDF comes
@@ -444,8 +446,10 @@ function initCVDownload() {
     const filename = ((nameEl ? nameEl.textContent : 'cv').trim().toLowerCase()
       .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'cv') + '-cv.pdf';
 
+    // Prefer the link's own href: it carries the content revision.
+    const pdfUrl = link.getAttribute('href') || CV_PDF_URL;
     try {
-      const response = await fetch(CV_PDF_URL, { cache: 'no-store' });
+      const response = await fetch(pdfUrl, { cache: 'no-store' });
       const blob = await response.blob();
       // With no PDF deployed the fallback route answers with index.html: only
       // accept a real PDF rather than saving the page as "cv.pdf".
