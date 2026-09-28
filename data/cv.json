@@ -18,12 +18,11 @@
       "period_short": "2026 – Present",
       "location": "Barcelona, Spain",
       "responsibilities": [
-        "Founded Staysy, an app-free digital guidebook for short-term rental hosts: guests open a single link for pre-check-in info, WiFi, house rules, local tips and emergency contacts, with no app to install.",
-        "Own the product end to end: a Go (standard-library net/http) + HTMX + PostgreSQL (JSONB) application, a Next.js static-export marketing site in English, Spanish and French, self-hosted with Docker Compose behind Traefik.",
-        "Designed the host-facing model: an admin panel for 10-20+ properties, a structured content editor, and time-limited access codes per booking that auto-expire at checkout and can be revoked, with 404/410 semantics for unknown or expired links.",
-        "Run the commercial side: free and Pro tiers with Stripe billing, pricing and onboarding funnels, and sales and support channels, including localized guest-link sharing (native share sheet, preview unfurls per language).",
-        "Built the delivery pipeline: digest-pinned GHCR images, a UAT environment with Playwright end-to-end suites gated behind Cloudflare Access and Tailscale, and a manual promote-to-production release gate.",
-        "Keep the platform hardened and documented: security audits, structured specs, and infrastructure scripts for repeatable self-hosted deploys."
+        "Founded Staysy, an app-free digital guidebook for short-term rental hosts: guests open a single link for check-in details, WiFi, house rules, local tips and emergency contacts, with nothing to install.",
+        "Own the product end to end as a solo founder: research, positioning, design, build, launch and iteration, from the first prototype to paying customers.",
+        "Run the commercial side: free and Pro plans, subscription billing, pricing and onboarding, plus the sales and support conversations that decide what gets built next.",
+        "Delivered the platform for hosts managing 10-20+ properties, with per-booking guest access that expires automatically at checkout and support for English, Spanish and French.",
+        "Also own delivery, security and operations: automated tests, staged releases before production, and documented, repeatable deploys on self-hosted infrastructure."
       ]
     },
     {
