@@ -32,6 +32,9 @@ IND = "    "
 # a copy cached by a browser or by Cloudflare can never answer a fresh click --
 # headers alone do not help once a response is stored under that URL.
 DOWNLOAD_RE = re.compile(r'(<a href=")(assets/cv\.pdf)(\?v=[^"]*)?(" id="download-cv")')
+# The click must save the file even with no JavaScript (a stale cached script, or
+# an error earlier in the load handler, leaves the anchor to navigate on its own).
+PDF_FILENAME = "nahuel-santos-cv.pdf"
 # The footer's copyright line also comes from the data file, so the year is
 # changed in one place (and next year's edit is one line).
 COPYRIGHT_RE = re.compile(r'(<footer class="footer">[\s\S]*?<p>)([\s\S]*?)(</p>)')
@@ -236,7 +239,8 @@ def render(page: str, data: dict, rev: str) -> str:
         page = pattern.sub(lambda _m, b=builder: b(data), page, count=1)
 
     stamped, count = DOWNLOAD_RE.subn(
-        lambda m: f"{m.group(1)}{m.group(2)}?v={rev}{m.group(4)}", page, count=1)
+        lambda m: f"{m.group(1)}{m.group(2)}?v={rev}{m.group(4)} download=\"{PDF_FILENAME}\"",
+        page, count=1)
     if count != 1:
         raise SystemExit("render_cv_html: could not find the download link to stamp "
                          "(<a href=\"assets/cv.pdf\" id=\"download-cv\">)")

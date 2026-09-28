@@ -466,10 +466,10 @@ function initCVDownload() {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
     } catch (error) {
-      // No PDF to serve: let the browser generate one from this page instead of
-      // navigating to a route that would answer with HTML.
-      console.warn('CV PDF unavailable, generating one via the print dialog:', error);
-      window.print();
+      // Never leave the click dead: follow the link itself, which the server
+      // answers with Content-Disposition: attachment, so the file still saves.
+      console.warn('CV PDF fetch failed, following the link instead:', error);
+      window.location.assign(link.getAttribute('href') || CV_PDF_URL);
     }
   });
 }
