@@ -28,10 +28,15 @@ from pathlib import Path
 IND = "    "
 
 # The download link carries a revision of everything that shapes the PDF (the
-# data file and the PDF generator). A release therefore ships a new PDF URL, so
-# a copy cached by a browser or by Cloudflare can never answer a fresh click --
-# headers alone do not help once a response is stored under that URL.
-DOWNLOAD_RE = re.compile(r'(<a href=")(assets/cv\.pdf)(\?v=[^"]*)?(" id="download-cv")')
+# data file, the PDF generator, and this file). A release therefore ships a new
+# PDF URL, so a copy cached by a browser or by Cloudflare can never answer a
+# fresh click -- headers alone do not help once a response is stored.
+#
+# The path is deliberately extensionless: Cloudflare caches by extension, and a
+# .pdf path stored at the edge keeps whatever it first got -- including Traefik's
+# headerless 404 during the minutes after a recreate. /cv/download is served with
+# cf-cache-status: DYNAMIC, so a transient failure is never stored.
+DOWNLOAD_RE = re.compile(r'(<a href=")(cv/download)(\?v=[^"]*)?(" id="download-cv")')
 # The click must save the file even with no JavaScript (a stale cached script, or
 # an error earlier in the load handler, leaves the anchor to navigate on its own).
 PDF_FILENAME = "nahuel-santos-cv.pdf"
@@ -84,7 +89,7 @@ def header_block(d: dict) -> str:
 {IND}{IND}{IND}{IND}{IND}<img src="assets/github.svg" alt="github" class="icon">
 {IND}{IND}{IND}{IND}{IND}GitHub
 {IND}{IND}{IND}{IND}</a>
-{IND}{IND}{IND}{IND}<a href="assets/cv.pdf" id="download-cv" class="btn btn-outline">
+{IND}{IND}{IND}{IND}<a href="cv/download" id="download-cv" class="btn btn-outline">
 {IND}{IND}{IND}{IND}{IND}<img src="assets/download-alt.svg" alt="download" class="icon">
 {IND}{IND}{IND}{IND}{IND}Download CV
 {IND}{IND}{IND}{IND}</a>
@@ -243,7 +248,7 @@ def render(page: str, data: dict, rev: str) -> str:
         page, count=1)
     if count != 1:
         raise SystemExit("render_cv_html: could not find the download link to stamp "
-                         "(<a href=\"assets/cv.pdf\" id=\"download-cv\">)")
+                         "(<a href=\"cv/download\" id=\"download-cv\">)")
 
     if data.get("copyright"):
         stamped, count = COPYRIGHT_RE.subn(
