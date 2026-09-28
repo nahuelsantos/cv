@@ -39,7 +39,8 @@ COPYRIGHT_RE = re.compile(r'(<footer class="footer">[\s\S]*?<p>)([\s\S]*?)(</p>)
 
 def content_rev(data_path: pathlib.Path) -> str:
     h = hashlib.sha256()
-    for p in (data_path, pathlib.Path(__file__).with_name("generate_cv_pdf.py")):
+    here = pathlib.Path(__file__)
+    for p in (data_path, here.with_name("generate_cv_pdf.py"), here):
         h.update(p.read_bytes())
     return h.hexdigest()[:10]
 
