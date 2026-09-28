@@ -8,7 +8,9 @@ FROM python:3.13-slim AS cvpdf
 WORKDIR /build
 RUN pip install --no-cache-dir reportlab==5.0.1 pypdf==6.19.0
 COPY index.html ./
-COPY data/cv.json ./
+# Explicit destination: `COPY data/cv.json ./` would land at /build/cv.json
+# and the RUN below expects data/cv.json.
+COPY data/cv.json data/cv.json
 COPY scripts/ scripts/
 RUN python3 scripts/render_cv_html.py --data data/cv.json --html index.html \
  && python3 scripts/generate_cv_pdf.py data/cv.json -o cv.pdf
