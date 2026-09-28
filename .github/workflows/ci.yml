@@ -29,6 +29,8 @@ jobs:
           "style.css" 
           "script.js"
           "data/cv.template.json"
+          "scripts/extract_cv_json.py"
+          "scripts/generate_cv_pdf.py"
           "data/cv.template.pdf"
           "Dockerfile"
           "nginx.conf"
