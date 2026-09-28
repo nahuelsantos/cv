@@ -29,7 +29,8 @@ jobs:
           "style.css" 
           "script.js"
           "data/cv.template.json"
-          "scripts/extract_cv_json.py"
+          "data/cv.json"
+          "scripts/render_cv_html.py"
           "scripts/generate_cv_pdf.py"
           "data/cv.template.pdf"
           "Dockerfile"
@@ -72,6 +73,15 @@ jobs:
           exit 1
         }
         echo "✅ CV template JSON is valid"
+
+    - name: Check index.html matches data/cv.json
+      run: |
+        # data/cv.json is the source of truth for the CV content. If the page is
+        # stale, the site and its own data file would disagree.
+        python3 scripts/render_cv_html.py --check || {
+          echo "❌ index.html is out of date - run: python3 scripts/render_cv_html.py"
+          exit 1
+        }
 
     - name: Check CSS syntax
       run: |

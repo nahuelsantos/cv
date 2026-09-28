@@ -16,7 +16,7 @@ else
 	DOCKER_COMPOSE := docker-compose
 endif
 
-.PHONY: help run test start stop clean
+.PHONY: help run test start stop clean cv
 
 # Default target
 all: start
@@ -43,6 +43,13 @@ test: ## Run basic tests and validation
 	@echo "✅ Testing Docker build..."
 	@docker-compose build >/dev/null 2>&1 && echo "✅ Docker build successful" || echo "❌ Docker build failed"
 	@echo "✅ All basic tests passed!"
+
+# Regenerate the page and the CV PDF from data/cv.json
+cv: ## Rebuild index.html and assets/cv.pdf from data/cv.json
+	@echo "📄 Rendering the CV from data/cv.json..."
+	@python3 scripts/render_cv_html.py
+	@python3 scripts/generate_cv_pdf.py
+	@echo "✅ index.html and assets/cv.pdf are up to date"
 
 # Start with Docker Compose
 start: ## Start the CV website in detached mode
