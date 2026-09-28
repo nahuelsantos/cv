@@ -119,3 +119,11 @@ jobs:
           exit 1
         }
         echo "✅ manifest.json is valid" 
+
+    - name: Build the image
+      run: |
+        # The release build should never be the first time a Dockerfile is
+        # compiled: v0.0.6 shipped a broken Dockerfile because a COPY landed at
+        # the wrong path and only the release workflow built the image.
+        docker build -t cv:ci .
+        echo "✅ Docker image builds"
