@@ -1,4 +1,5 @@
 {
+  "template": true,
   "name": "John Doe",
   "title": "Software Engineer",
   "location": "Quilmes, Argentina",

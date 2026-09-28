@@ -74,6 +74,17 @@ Replace `data/cv.pdf` with your actual resume file.
 
 **That's it!** The website automatically updates when you change these files.
 
+### How the data is loaded
+
+`script.js` fetches `/cv.json` and `/assets/cv.pdf`, which nginx resolves through
+the fallback routes in `nginx.conf`: files mounted at `/assets/external` (your
+`data/` folder) win, the bundled templates are served otherwise.
+
+`data/cv.template.json` carries `"template": true`. That marker tells `script.js`
+to keep the markup shipped in `index.html` instead of rendering placeholder
+content over it, so the page never shows "John Doe" — or an error banner — when
+your real data is not mounted.
+
 ## 🔄 Hot Reload (Server Updates)
 
 Update your live website without rebuilding:

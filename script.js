@@ -426,9 +426,14 @@ function closeContactForm() {
     window.contactForm?.close();
 }
 
+// CV data + PDF are served through the nginx fallback routes (see nginx.conf):
+// the externally mounted files win, the bundled templates are the fallback.
+const CV_DATA_URL = 'cv.json';
+const CV_PDF_URL = 'assets/cv.pdf';
+
 // JSON-driven CV population
 function populateCVFromJSON() {
-  fetch('assets/external/cv.json')
+  fetch(CV_DATA_URL, { cache: 'no-store' })
     .then(res => {
       if (!res.ok) {
         throw new Error(`Failed to load CV data: ${res.status}`);
@@ -436,6 +441,13 @@ function populateCVFromJSON() {
       return res.json();
     })
     .then(data => {
+      // data/cv.template.json is placeholder content: rendering it would swap a
+      // real CV for "John Doe". Keep the markup that ships with index.html.
+      if (data.template === true) {
+        console.info('Placeholder CV data detected, keeping the built-in CV content.');
+        return;
+      }
+
       // Header
       document.querySelector('.name').textContent = data.name;
       document.querySelector('.title').textContent = data.title;
@@ -459,9 +471,13 @@ function populateCVFromJSON() {
               downloadLink.addEventListener('click', async (e) => {
                   e.preventDefault();
                   try {
-                      const response = await fetch('assets/external/cv.pdf');
-                      if (!response.ok) throw new Error('PDF not found');
+                      const response = await fetch(CV_PDF_URL);
                       const blob = await response.blob();
+                      // With no external PDF deployed the fallback route answers
+                      // with index.html, so only accept a real PDF.
+                      if (!response.ok || !blob.type.includes('pdf')) {
+                          throw new Error('PDF not available');
+                      }
                       const url = window.URL.createObjectURL(blob);
                       const a = document.createElement('a');
                       a.style.display = 'none';
@@ -473,8 +489,9 @@ function populateCVFromJSON() {
                       document.body.removeChild(a);
                   } catch (error) {
                       console.error('Error downloading PDF:', error);
-                      // Fallback to direct link if blob download fails
-                      window.open('assets/external/cv.pdf', '_blank');
+                      // Fallback to a plain navigation: the link target and the
+                      // nginx fallback route already resolve to the real PDF.
+                      window.location.href = CV_PDF_URL;
                   }
               });
           }
@@ -552,9 +569,8 @@ function populateCVFromJSON() {
       });
     })
     .catch(error => {
-      console.error('Error loading CV data:', error);
-      // Show a subtle error message if CV data fails to load
-      document.querySelector('.name').textContent = 'CV Data Loading Error';
-      document.querySelector('.summary').textContent = 'Failed to load CV data. Please check the configuration.';
+      // Keep the markup from index.html: it is a complete CV on its own, and an
+      // error banner is worse than the content it would replace.
+      console.warn('Could not load CV data, keeping the built-in CV content:', error);
     });
 } 
