@@ -57,6 +57,34 @@ data/
 
 **Everything you need to edit is in the `data/` folder!**
 
+## 📄 PDF Generation
+
+The downloadable PDF is generated from the same content the page renders, at
+image build time. There is no second copy of the CV to keep in sync and no
+"John Doe" placeholder that can ship by accident:
+
+```bash
+# what stage 1 of the Dockerfile runs
+python3 scripts/extract_cv_json.py index.html -o data/cv.json    # page  -> data
+python3 scripts/generate_cv_pdf.py data/cv.json -o assets/cv.pdf # data  -> PDF
+```
+
+`scripts/extract_cv_json.py` reads `index.html` (contact details come from
+`humans.txt`) and refuses to emit any string that is not already on the page, so
+the extracted data cannot drift from the site or invent content.
+
+`scripts/generate_cv_pdf.py` renders an ATS-friendly PDF: one column, real text
+in the standard Helvetica family, conventional section headings ("Experience",
+"Education", "Skills"), no tables, text boxes, images or icons, and no page
+headers/footers that parsers merge into the content. Every URL is printed as
+literal text as well as a link. It then re-reads the finished PDF and checks
+that every value reached the text layer, so the build fails instead of shipping
+a truncated CV.
+
+To use your own PDF instead, put it at `data/cv.pdf`: nginx serves
+`assets/external/cv.pdf` first (`try_files` in `nginx.conf`), so it wins over the
+generated one without a rebuild.
+
 ## Editing Your CV
 
 ### Update Content

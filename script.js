@@ -399,6 +399,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     populateCVFromJSON();
+    initCVDownload();
 
     // Add event listeners for buttons that were using inline onclick
     const headerContactBtn = document.getElementById('header-contact-btn');
@@ -430,6 +431,44 @@ function closeContactForm() {
 // the externally mounted files win, the bundled templates are the fallback.
 const CV_DATA_URL = 'cv.json';
 const CV_PDF_URL = 'assets/cv.pdf';
+
+// The download button is wired up regardless of the JSON flow: the PDF comes
+// from a fixed route, so it must work even when the data fetch fails.
+function initCVDownload() {
+  const link = document.getElementById('download-cv');
+  if (!link) return;
+
+  link.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const nameEl = document.querySelector('.name');
+    const filename = ((nameEl ? nameEl.textContent : 'cv').trim().toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'cv') + '-cv.pdf';
+
+    try {
+      const response = await fetch(CV_PDF_URL, { cache: 'no-store' });
+      const blob = await response.blob();
+      // With no PDF deployed the fallback route answers with index.html: only
+      // accept a real PDF rather than saving the page as "cv.pdf".
+      if (!response.ok || !blob.type.includes('pdf')) {
+        throw new Error('PDF not available');
+      }
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      // No PDF to serve: let the browser generate one from this page instead of
+      // navigating to a route that would answer with HTML.
+      console.warn('CV PDF unavailable, generating one via the print dialog:', error);
+      window.print();
+    }
+  });
+}
 
 // JSON-driven CV population
 function populateCVFromJSON() {
@@ -463,38 +502,6 @@ function populateCVFromJSON() {
           const githubLink = actionsContainer.querySelector('a[href*="github.com"]');
           if (githubLink) githubLink.href = data.contact.github;
 
-          const downloadLink = document.getElementById('download-cv');
-          if (downloadLink) {
-              const nameParts = data.name.toLowerCase().split(' ');
-              const filename = `${nameParts[0]}-${nameParts[nameParts.length - 1]}-cv.pdf`;
-
-              downloadLink.addEventListener('click', async (e) => {
-                  e.preventDefault();
-                  try {
-                      const response = await fetch(CV_PDF_URL);
-                      const blob = await response.blob();
-                      // With no external PDF deployed the fallback route answers
-                      // with index.html, so only accept a real PDF.
-                      if (!response.ok || !blob.type.includes('pdf')) {
-                          throw new Error('PDF not available');
-                      }
-                      const url = window.URL.createObjectURL(blob);
-                      const a = document.createElement('a');
-                      a.style.display = 'none';
-                      a.href = url;
-                      a.download = filename;
-                      document.body.appendChild(a);
-                      a.click();
-                      window.URL.revokeObjectURL(url);
-                      document.body.removeChild(a);
-                  } catch (error) {
-                      console.error('Error downloading PDF:', error);
-                      // Fallback to a plain navigation: the link target and the
-                      // nginx fallback route already resolve to the real PDF.
-                      window.location.href = CV_PDF_URL;
-                  }
-              });
-          }
       }
 
       // Experience
